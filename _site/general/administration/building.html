@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Building from Source | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Building from Source | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="admin-building">
+<h1 id="source">Source</h1>
+<!-- markdownlint-disable MD029 ol-prefix -->
+
+<p>As an alternative to using <a class="xref" href="installing.html">binary packages</a>, you can build Jellyfin from source.</p>
+<p>Jellyfin supports several methods of building for different platforms and instructions for all supported platforms are below.</p>
+<p>All package builds begin with these two steps:</p>
+<ol>
+<li><p>Clone the repository.</p>
+<pre><code class="lang-sh">git clone https://github.com/jellyfin/jellyfin.git
+cd jellyfin
+</code></pre>
+</li>
+<li><p>Initialize the submodules.</p>
+<pre><code class="lang-sh">git submodule update --init
+</code></pre>
+</li>
+</ol>
+<h2 id="container-image">Container image</h2>
+<ol>
+<li><p>Build the container image using Docker or Podman.</p>
+<pre><code class="lang-sh">docker build -t $USERNAME/jellyfin .
+</code></pre>
+<p>or</p>
+<pre><code class="lang-sh">podman build -t $USERNAME/jellyfin .
+</code></pre>
+</li>
+<li><p>Run Jellyfin in a new container using Docker or Podman from the built container image.</p>
+<pre><code class="lang-sh">docker run -d -p 8096:8096 $USERNAME/jellyfin
+</code></pre>
+<p>or</p>
+<pre><code class="lang-sh">podman run -d -p 8096:8096 $USERNAME/jellyfin
+</code></pre>
+</li>
+</ol>
+<h2 id="linux-or-macos">Linux or MacOS</h2>
+<ol start="3">
+<li><p>Use the included <code>build</code> script to perform builds.</p>
+<pre><code class="lang-sh">./build --help
+./build --list-platforms
+./build &lt;platform&gt; all
+</code></pre>
+</li>
+<li><p>The resulting archives can be found at <code>../bin/&lt;platform&gt;</code>.</p>
+</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This will very likely be split out into a separate repository at some point in the future.</p>
+</div>
+<h2 id="windows">Windows</h2>
+<ol start="3">
+<li><p>Install dotnet SDK 6.0 from <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">Microsoft's Website</a> and <a href="https://gitforwindows.org/">install Git for Windows</a>.
+You must be on Powershell 3 or higher.</p>
+</li>
+<li><p>From Powershell set the execution policy to unrestricted.</p>
+<pre><code class="lang-powershell">set-executionpolicy unrestricted
+</code></pre>
+</li>
+<li><p>If you are building a version of Jellyfin newer than 10.6.4, you will need to download the build script from a separate repository.</p>
+<pre><code class="lang-powershell">git clone https://github.com/jellyfin/jellyfin-server-windows.git windows
+</code></pre>
+</li>
+<li><p>Run the Jellyfin build script.</p>
+<pre><code class="lang-powershell">windows\build-jellyfin.ps1 -verbose
+</code></pre>
+<ul>
+<li><p>The <code>-WindowsVersion</code> and <code>-Architecture</code> flags can optimize the build for your current environment; the default is generic Windows x64.</p>
+</li>
+<li><p>The <code>-InstallLocation</code> flag lets you select where the compiled binaries go; the default is <code>$Env:AppData\Jellyfin-Server\</code>.</p>
+</li>
+<li><p>The <code>-InstallFFMPEG</code> flag will automatically pull the stable <code>ffmpeg</code> binaries appropriate to your architecture (x86/x64 only for now) from <a href="https://github.com/BtbN/FFmpeg-Builds/releases">BtbN</a> and place them in your Jellyfin directory.</p>
+</li>
+<li><p>The <code>-InstallNSSM</code> flag will automatically pull the stable <code>nssm</code> binary appropriate to your architecture (x86/x64 only for now) from <a href="https://nssm.cc/">NSSM's Website</a> and place it in your Jellyfin directory.</p>
+</li>
+</ul>
+</li>
+<li><p>(Optional) Use <a href="https://nssm.cc">NSSM</a> to configure Jellyfin to run as a service.</p>
+</li>
+<li><p>Jellyfin is now available in the default directory, or whichever directory you chose.</p>
+<ul>
+<li><p>Start it from PowerShell.</p>
+<pre><code class="lang-powershell">&amp;&quot;$env:APPDATA\Jellyfin-Server\jellyfin.exe&quot;
+</code></pre>
+</li>
+<li><p>Start it from CMD.</p>
+<pre><code class="lang-cmd">%APPDATA%\Jellyfin-Server\jellyfin.exe
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This will very likely be split out into a separate repository at some point in the future.</p>
+</div>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

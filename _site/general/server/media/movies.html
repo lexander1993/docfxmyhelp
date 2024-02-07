@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Movies | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Movies | myhelp ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="server-media-movies">
+<h1 id="movies">Movies</h1>
+
+<p>Movies should usually be in the library root directory or in a subfolder for the individual films. The subfolders allow for organization of metadata and images. Adding the year at the end in parentheses will yield the best results when scraping metadata.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>In order to help with identifying a movie, Jellyfin can make use of media provider identifiers. This can be specified in your movie's folder name, for example: <code>Film (2010) [imdbid-tt0106145]</code> or <code>Film (2018) [tmdbid-65567]</code></p>
+</div>
+<pre><code class="lang-txt">Movies
+├── Film (1990).mp4
+├── Film (1994).mp4
+├── Film (2008)
+│   └── Film.mkv
+└── Film (2010)
+    ├── Film-cd1.avi
+    └── Film-cd2.avi
+</code></pre>
+<h2 id="multiple-versions-of-a-movie">Multiple Versions of a Movie</h2>
+<p>Multiple versions of a movie can be stored together and presented as a single title. Place each movie version in the same folder and give each version a name with the folder name as a prefix as seen below.</p>
+<pre><code class="lang-txt">Movies
+└── Best_Movie_Ever (2019)
+    ├── Best_Movie_Ever (2019) - 1080P.mp4
+    ├── Best_Movie_Ever (2019) - 720P.mp4
+    └── Best_Movie_Ever (2019) - Directors Cut.mp4
+</code></pre>
+<p>To distinguish between versions, each filename needs to have a space, hyphen, space, and then a label. Labels are not predetermined and can be made up by the user.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The hyphen is required. Periods, commas and other characters are not supported.</p>
+</div>
+<p>Additionally, labels can be placed between brackets with the same result as seen below.</p>
+<pre><code class="lang-txt">Movies
+└── Best_Movie_Ever (2019)
+    ├── Best_Movie_Ever (2019) - [1080P].mp4
+    ├── Best_Movie_Ever (2019) - [720P].mp4
+    └── Best_Movie_Ever (2019) - [Directors Cut].mp4
+</code></pre>
+<p>If labels are not added to the end of filenames, as shown above, each file will be treated as a unique movie and not a version of the same movie.</p>
+<h3 id="order-of-versions">Order of Versions</h3>
+<p>Movie versions are presented in an alphabetically sorted list. An exception applies to resolution names, which are sorted in descending order from highest to lowest resolution. A version name qualifies as a resolution name when ending with either a <code>p</code> or an <code>i</code>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The first movie version in the list is the one selected by default.</p>
+</div>
+<h4 id="examples-of-sorting">Examples of Sorting</h4>
+<ul>
+<li><code>1080p</code>, <code>2160p</code>, <code>360p</code>, <code>480p</code>, <code>720p</code> → <code>2160p</code>, <code>1080p</code>, <code>720p</code>, <code>480p</code>, <code>360p</code></li>
+<li><code>Extended Cut</code>, <code>Cinematic Cut</code>, <code>Director's Cut</code> → <code>Cinematic Cut</code>, <code>Director's Cut</code>, <code>Extended Cut</code></li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>To group media manually, long-click or right-click media to highlight then select additional media to merge. Use the new bar that appears to 'Group Versions'.</p>
+</div>
+<h2 id="movie-extras">Movie Extras</h2>
+<p>Movie extras can include deleted scenes, interviews, and other various things that you would want to include alongside your movie. Jellyfin supports several different methods of adding these files.</p>
+<h3 id="extras-folders">Extras Folders</h3>
+<p>One of the cleanest ways of adding extras is to place them in subfolders within your movie folder.</p>
+<p>Supported folder types are:</p>
+<ul>
+<li><code>behind the scenes</code></li>
+<li><code>deleted scenes</code></li>
+<li><code>interviews</code></li>
+<li><code>scenes</code></li>
+<li><code>samples</code></li>
+<li><code>shorts</code></li>
+<li><code>featurettes</code></li>
+<li><code>extras</code> - Generic catch all for extras of an unknown type.</li>
+<li><code>trailers</code></li>
+</ul>
+<pre><code class="lang-txt">Movies
+└── Best_Movie_Ever (2019)
+    ├── Best_Movie_Ever (2019) - 1080P.mp4
+    ├── Best_Movie_Ever (2019) - 720P.mp4
+    ├── Best_Movie_Ever (2019) - Directors Cut.mp4
+    ├── behind the scenes
+    │   ├── Making of the Best Movie Ever.mp4
+    │   └── Finding the right score.mp4
+    ├── interviews
+    │   └── Interview with the Director.mp4
+    └── extras
+        └── Home recreation.mp4
+</code></pre>
+<h3 id="file-name">File Name</h3>
+<p>Some types of extras support a special option if you only have a single of that type. These options are to name the filename a specific word when stored in the same folder as the movie.</p>
+<p>Supported filenames are:</p>
+<ul>
+<li><code>trailer</code></li>
+<li><code>sample</code></li>
+<li><code>theme</code> - Audio file of the theme song</li>
+</ul>
+<pre><code class="lang-txt">Movies
+└── Best_Movie_Ever (2019)
+    ├── Best_Movie_Ever (2019) - 1080P.mp4
+    ├── sample.mp4
+    ├── theme.mp3
+    └── trailer.mp4
+</code></pre>
+<h3 id="file-suffix">File Suffix</h3>
+<p>If you would rather keep everything in a single folder, you can append special suffixes to the filename which Jellyfin picks up and uses to identify the file as an extra. Note that, with a few noted exceptions, these suffexes <strong>DO NOT</strong> contain any spaces.</p>
+<!-- markdownlint-disable MD038 -->
+<ul>
+<li><code>-trailer</code></li>
+<li><code>.trailer</code></li>
+<li><code>_trailer</code></li>
+<li><code> trailer</code> - This is a space followed by the word <code>trailer</code></li>
+<li><code>-sample</code></li>
+<li><code>.sample</code></li>
+<li><code>_sample</code></li>
+<li><code> sample</code> - This is a space followed by the word <code>sample</code></li>
+<li><code>-scene</code></li>
+<li><code>-clip</code></li>
+<li><code>-interview</code></li>
+<li><code>-behindthescenes</code></li>
+<li><code>-deleted</code></li>
+<li><code>-featurette</code></li>
+<li><code>-short</code></li>
+</ul>
+<!-- markdownlint-enable MD038 -->
+<pre><code class="lang-txt">Movies
+└── Best_Movie_Ever (2019)
+    ├── Best_Movie_Ever (2019) - 1080P.mp4
+    ├── That clip that I want everyone to see-clip.mp4
+    ├── Release Trailer-trailer.mp4
+    ├── Preview Trailer.trailer.avi
+    ├── Release Trailer 2_trailer.avi
+    ├── Teaser.sample.mp4
+    ├── Favorite Scene-scene.mp4
+    ├── The Best Ever-clip.mp4
+    ├── Making of The Best Movie Ever-behindthescenes.mp4
+    ├── Not the best scene-deleted.mp4
+    ├── Theme Song Music Video-featurette.mp4
+    └── Art of the Best Movie Ever-short.mp4
+</code></pre>
+<h2 id="images">Images</h2>
+<p>The following files may also be embedded into video containers that support it (such as mkv) and will be read out by the <code>Embedded Image Extractor</code> if enabled as an <code>Image Extractor</code> on the library configuration page.</p>
+<h3 id="poster">Poster</h3>
+<ul>
+<li>folder.ext</li>
+<li>poster.ext</li>
+<li>cover.ext</li>
+<li>default.ext</li>
+<li>movie.ext</li>
+</ul>
+<p>Examples:</p>
+<p>Movie (2010)/poster.jpg</p>
+<h3 id="backdrop">Backdrop</h3>
+<ul>
+<li>backdrop.ext</li>
+<li>fanart.ext</li>
+<li>background.ext</li>
+<li>art.ext</li>
+<li>extrafanart/*.ext</li>
+</ul>
+<p>Examples:</p>
+<p>Movie (2010)/fanart.jpg <em>for the first backdrop image</em></p>
+<p>Movie (2010)/extrafanart/fanart1.jpg, Movie (2010)/extrafanart/fanart2.jpg, <em>etc for additional backdrop images</em></p>
+<h3 id="logo">Logo</h3>
+<ul>
+<li>logo.ext</li>
+<li>clearlogo.ext</li>
+</ul>
+<p>Example:</p>
+<p>Movie (2010)/logo.png</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

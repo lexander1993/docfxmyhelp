@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Releases | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Releases | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="contrib-release-procedure">
+<h1 id="release-procedure">Release Procedure</h1>
+
+<p>This document is a guide for the core team, provided publicly to ensure transparency in the release process.</p>
+<h2 id="versioning">Versioning</h2>
+<p>Jellyfin uses <a href="https://semver.org">semantic versioning</a>. All releases will have versions in the <code>X.Y.Z</code> format, starting from <code>10.0.0</code>. Note however that the <code>10.Y.Z</code> release chain represents the &quot;cleanup&quot; of the codebase, so it should be accepted that <code>10.Y.Z</code> breaks all compatibility, at some point, with previous Emby-compatible interfaces, and may also break compatibility with previous <code>10.Y</code> releases if required for later cleanup work. Our versioning will typically follow the patterns below:</p>
+<h3 id="x-major-versions">X: Major Versions</h3>
+<ul>
+<li>Breaks compatibility with the HTTP or plugin APIs</li>
+</ul>
+<h3 id="y-minor-versions">Y: Minor Versions</h3>
+<ul>
+<li>Introduces new features</li>
+<li>Makes minor backwards-compatible API changes</li>
+</ul>
+<h3 id="z-hotfix-versions">Z: Hotfix Versions</h3>
+<ul>
+<li>Critical bug fixes or minor changes</li>
+</ul>
+<h2 id="general-release-philosophy">General Release Philosophy</h2>
+<p>Releases will generally be performed on Sundays &quot;when ready&quot;. For Major/Minor releases, the &quot;when ready&quot; is generally quite flexible and is whenever the release is truly ready without major breaking bugs. After a major release, each Sunday the Admin team should review the recently merged PRs and, if backports are required, perform a Hotfix release containing those PRs.</p>
+<h3 id="major-release-procedure">Major Release Procedure</h3>
+<h4 id="preparation">Preparation</h4>
+<ol>
+<li><p>Testing is ongoing via <code>master</code> nightly builds, so <code>master</code> should be generally unbroken before proceeding. The version of <code>master</code> should already reflect the upcoming major release version (i.e. <code>X.Y.0</code>).</p>
+</li>
+<li><p>Once <code>master</code> is in a generally stable state after extensive work, announce a &quot;golden nightly&quot; is incoming via the <a href="https://matrix.to/#/#jellyfin-dev:matrix.org">jellyfin-dev</a> Matrix/Riot channel and Reddit.</p>
+</li>
+<li><p>Collect testing information and repeat as needed.</p>
+</li>
+<li><p>Once the release is considered stable and working, announce full PR freeze via the <a href="https://matrix.to/#/#jellyfin-dev:matrix.org">jellyfin-dev</a> Matrix/Riot channel.</p>
+</li>
+<li><p>Allow one further &quot;golden nightly&quot; and at least 48 hours of testing time. Restart this process if major breaking bugs are found.</p>
+</li>
+<li><p>Once all testing is complete and the release remains stable, proceed.</p>
+</li>
+</ol>
+<h4 id="release-web-client">Release Web Client</h4>
+<ol>
+<li><p>Create a release branch on the <a href="https://github.com/jellyfin/jellyfin-web">jellyfin-web</a> repository via CLI from <code>master</code>, named <code>release-X.Y.z</code>, where <code>X</code> and <code>Y</code> are the new version number, and <code>z</code> is a literal <code>z</code>. Push the new branch to GitHub.</p>
+</li>
+<li><p>Create a GitHub release for the new version, based on the newly-created <code>release-X.Y.z</code> branch. The tag should be named <code>vX.Y.Z</code> (i.e. <code>vX.Y.0</code>) and the release named &quot;Release X.Y.Z&quot;. The release body should contain the following link only, replacing the version as required:</p>
+<pre><code class="lang-md">[Please see the release announcement on the main repository.](https://github.com/jellyfin/jellyfin/releases/tag/vX.Y.Z)
+</code></pre>
+</li>
+<li><p>Publish the release.</p>
+</li>
+</ol>
+<h4 id="release-server">Release Server</h4>
+<ol>
+<li><p>Create a release branch on the <a href="https://github.com/jellyfin/jellyfin">jellyfin</a> repository via CLI from <code>master</code>, named <code>release-X.Y.z</code>, where <code>X</code> and <code>Y</code> are the new version number, and <code>z</code> is a literal <code>z</code>. Push the new branch to GitHub.</p>
+</li>
+<li><p>Create a GitHub release for the new version, based on the newly-created <code>release-X.Y.z</code> branch. The tag should be named <code>vX.Y.Z</code> (i.e. <code>vX.Y.0</code>) and the release named &quot;Release X.Y.Z&quot;. The release body should contain the following components:</p>
+<p>a. A quick top blurb under a <code># Jellyfin X.Y.Z</code> header.</p>
+<p>a. A list of features, including in-line links to Fider if available, under a <code>## New Features and Major Improvements</code> header.</p>
+<p>a. A list of known release notes, categorized by the relevant platform (e.g. <code>[All]</code> or <code>[Windows]</code>), under a <code>## Important Release Notes</code> header.</p>
+<p>a. If applicable, a set of release notes/comments about FFmpeg, under a <code>## FFmpeg</code> header.</p>
+<p>a. A full changelog, split by repository with <code>### [repo](https://github.com/jellyfin/repo)</code> subheaders, under a <code>## Changelog</code> header. Each element should be a PR number and the PR title.</p>
+</li>
+<li><p>Publish the release.</p>
+</li>
+<li><p>Wait for builds to complete.</p>
+</li>
+<li><p>Announce the new release in the <a href="https://matrix.to/#/#jellyfin-announce:matrix.org">jellyfin-announce</a> Matrix/Riot channel and anywhere else required (e.g. Reddit, etc.).</p>
+</li>
+</ol>
+<h3 id="hotfix-release-procedure">Hotfix Release Procedure</h3>
+<ol>
+<li><p>During normal work on the <code>master</code> branch, select PRs suitable for backporting by tagging them with the <code>stable-backport</code> label during the PR lifecycle. All PRs will target <code>master</code> and thus bugfixes for the stable release must include this label to be included.</p>
+</li>
+<li><p>Collect the list of merged <code>stable-backport</code> PRs from all relevant repositories.</p>
+</li>
+<li><p>For each repository, perform stable branch reconciliation for the relevant PRs:</p>
+<ol>
+<li><p>For each PR slated for backport:</p>
+<ol>
+<li><p>Grab the <em>merge commit</em> hash for the PR from <code>master</code> branch.</p>
+</li>
+<li><p>Cherry-pick the merge commit into the <code>release-x.y.z</code> branch via: <code>git cherry-pick -sx -m1 &lt;merge-commit-hash&gt;</code>.</p>
+</li>
+<li><p>Fix any merge conflicts, generally keeping what's in the merge. If there are significant merge conflicts, this likely indicates that the fix is too large for backporting.</p>
+</li>
+<li><p>Finalize the cherry-pick via: <code>git add</code> and <code>git commit -v</code>.</p>
+</li>
+</ol>
+</li>
+<li><p>For the main <a href="https://github.com/jellyfin/jellyfin">jellyfin</a> repository, bump the version of the repository to the new hotfix version with the <code>bump_version</code> script and commit the result with the message &quot;Bump version for X.Y.Z&quot;.</p>
+</li>
+<li><p>Push the updated release branch to GitHub.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="web-client">Web Client</h4>
+<ol>
+<li><p>Create a GitHub release for the new version, based on the relevant <code>release-X.Y.z</code> branch. The tag should be named <code>vX.Y.Z</code> and the release named &quot;Release X.Y.Z&quot;. The release body should contain the following link only, replacing the version as required:</p>
+<pre><code class="lang-md">[Please see the release announcement on the main repository.](https://github.com/jellyfin/jellyfin/releases/tag/vX.Y.Z)
+</code></pre>
+</li>
+<li><p>Publish the release on GitHub and the archive repository.</p>
+</li>
+</ol>
+<h4 id="server">Server</h4>
+<ol>
+<li><p>Create a GitHub release for the new version, based on the relevant <code>release-X.Y.z</code> branch. The tag should be named <code>vX.Y.Z</code> and the release named &quot;Release X.Y.Z&quot;. The release body should contain the following components:</p>
+<p>a. A quick top blurb under a <code># Jellyfin X.Y.Z</code> header.</p>
+<p>a. A list of known release notes, categorized by the relevant platform (e.g. <code>[All]</code> or <code>[Windows]</code>), under a <code>## Important Release Notes</code> header.</p>
+<p>a. If applicable, a set of release notes/comments about FFmpeg, under a <code>## FFmpeg</code> header.</p>
+<p>a. A full changelog, split by repository with <code>### [repo](https://github.com/jellyfin/repo)</code> subheaders, under a <code>## Changelog</code> header. Each element should be a PR number and the PR title.</p>
+</li>
+<li><p>Publish the release.</p>
+</li>
+<li><p>Wait for builds to complete.</p>
+</li>
+<li><p>Announce the new release in the <a href="https://matrix.to/#/#jellyfin-announce:matrix.org">jellyfin-announce</a> channel and anywhere else as required.</p>
+</li>
+</ol>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

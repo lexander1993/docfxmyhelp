@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Source Tree | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Source Tree | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="contrib-source-tree">
+<h1 id="source-tree">Source Tree</h1>
+
+<p>Jellyfin is a maze of clients, plugins, and other useful projects. These source trees can serve as an excellent tool to inform new developers about the structure of several projects.</p>
+<h2 id="jellyfin-server"><a href="https://github.com/jellyfin/jellyfin">Jellyfin Server</a></h2>
+<ol>
+<li>.ci: <code>Azure Pipelines Build definitions</code></li>
+<li>DvdLib: <code>DVD Anaylzer</code></li>
+<li>Emby.Dlna: <code>DLNA support for the server</code>
+<ul>
+<li>Profiles: <code>DLNA Profiles for clients</code></li>
+</ul>
+</li>
+<li>Emby.Drawing: <code>image processor managing the image encoder and image cache paths</code></li>
+<li>Emby.Naming: <code>parsers for the media filenames</code></li>
+<li>Emby.Notifications: <code>listening for events and sending the associated notification</code></li>
+<li>Emby.Photos: <code>metadata provider for photos</code></li>
+<li>Emby.Server.Implementations: <code>main implementations of the interfaces</code>
+<ul>
+<li>ScheduledTasks: <code>all scheduled tasks can be found here</code></li>
+</ul>
+</li>
+<li>Jellyfin.Api: <code>Jellyfin API</code>
+<ul>
+<li>Controller: <code>API controllers answering the Jellyfin API requests</code></li>
+<li>Helpers:
+<ul>
+<li>MediaInfoHelper.cs: <code>logic for the stream builder that determines method of playback such as Direct Play or Transcoding</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Jellyfin.Data: <code>models used in the Entity Framework Core Database schema</code></li>
+<li>Jellyfin.Drawing.Skia: <code>image manipulation like resizing images, making image collages</code></li>
+<li>Jellyfin.Networking: <code>managing network interaces and settings</code></li>
+<li>Jellyfin.Server.Implementations: <code>like Emby.Server.Implementations, implementations using the EF Core Database</code></li>
+<li>Jellyfin.Server: <code>main server project that starts the whole server</code></li>
+<li>MediaBrowser.Common: <code>common methods used throughout the server</code></li>
+<li>MediaBrowser.Controller: <code>interface definitions</code></li>
+<li>MediaBrowser.LocalMetadata: <code>metadata provider and saver for local images, local Collections and Playlists</code></li>
+<li>MediaBrowser.MediaEncoding: <code>managing ffmpeg while interacting with the media files</code></li>
+<li>MediaBrowser.Model: <code>defining models used throughout the server</code></li>
+<li>MediaBrowser.Providers: <code>managing multiple metadata sources</code></li>
+<li>MediaBrowser.XbmcMetadata: <code>metadata provider and saver for local .nfo files</code></li>
+<li>RSSDP: <a href="https://github.com/Yortw/RSSDP">RSSDP library</a><code>, including custom changes, for the Simple Service Discovery (SSDP) protocol</code></li>
+<li>apiclient: <code>files used for generating the axios API client</code></li>
+<li>deployment: <code>files used while building Jellyfin for different plattforms</code></li>
+<li>tests: <code>multiple Unit Test projects testing Jellyfin functionality</code></li>
+<li>Dockerfile.* <code>Dockerfiles defining the Jellyfin Docker image</code></li>
+</ol>
+<h2 id="web-client"><a href="https://github.com/jellyfin/jellyfin-web">Web Client</a></h2>
+<ol>
+<li>src:
+<ul>
+<li>assets: <code>images, styles, splash screens, and any other static assets</code>
+<ul>
+<li>css: <code>all global stylesheets used throughout the client</code></li>
+<li>img: <code>images for things like device icons and logos</code></li>
+<li>splash: <code>progressive web apps will show these splash screens</code></li>
+</ul>
+</li>
+<li>components: <code>custom elements used for different sections of the user interface</code>
+<ul>
+<li>playerstats.js: <code>display playback info in browsers and other clients that include the web source</code></li>
+</ul>
+</li>
+<li>controllers: <code>scripts that handle the logic for different pages</code></li>
+<li>elements: <code>custom UI components that are used globally such as buttons or menus</code></li>
+<li>legacy: <code>currently used for all polyfills and scripts related to backwards compatibility</code></li>
+<li>libraries: <code>dependencies that we eventually want to remove and include during the build step</code></li>
+<li>scripts: <code>any script that isn't tied to a UI element or page but rather general functionality</code></li>
+<li>strings: <code>translations for the entire interface</code></li>
+<li>themes: <code>custom and bundled themes can be found here in their own directories</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="android"><a href="https://github.com/jellyfin/jellyfin-android">Android</a></h2>
+<ol>
+<li>res:
+<ul>
+<li>android:</li>
+</ul>
+</li>
+<li>src:
+<ul>
+<li>NativeShell:
+<ul>
+<li>res:</li>
+<li>src:
+<ul>
+<li>RemotePlayerService.java: <code>handles the notification tile that can control playback</code></li>
+</ul>
+</li>
+<li>www:</li>
+</ul>
+</li>
+<li>cordova:</li>
+</ul>
+</li>
+</ol>
+<h2 id="android-tv"><a href="https://github.com/jellyfin/jellyfin-androidtv">Android TV</a></h2>
+<ol>
+<li>app:
+<ul>
+<li>src:
+<ul>
+<li>main:
+<ul>
+<li>java/org/jellyfin/androidtv:
+<ul>
+<li>constant: <code>constants/enums</code></li>
+<li>data:
+<ul>
+<li>compat: <code>classes ported from old apiclient to maintain compatibility in the app (Deprecated should be replaced/removed)</code></li>
+<li>eventhandling: <code>API webservice event handling</code></li>
+<li>model: <code>various data models</code></li>
+<li>querying: <code>extensions to the querying package in the apiclient (Should probably be replaced/removed)</code></li>
+<li>repository: <code>data repositories for shared access</code></li>
+</ul>
+</li>
+<li>di: <code>dependency injection modules</code></li>
+<li>integration: <code>Android TV homescreen channel integrations</code></li>
+<li>preference: <code>interface for Android shared preferences</code></li>
+<li>ui:
+<ul>
+<li>browsing: <code>views for browsing items (rows, grids, etc.)</code></li>
+<li>home: <code>home screen views</code></li>
+<li>itemdetail: <code>item detail views</code></li>
+<li>itemhandling: <code>BaseItem views</code></li>
+<li>livetv: <code>live TV views</code></li>
+<li>playback: <code>media player views</code></li>
+<li>preference: <code>app preferences/settings views</code></li>
+<li>presentation: <code>presenters from MVP architecture</code></li>
+<li>search: <code>search views</code></li>
+<li>shared: <code>shared code for UI classes</code></li>
+<li>startup: <code>authentication views</code></li>
+</ul>
+</li>
+<li>util: <code>various utilities</code></li>
+</ul>
+</li>
+<li>res: <code>Android resource files for XML layouts, translations, images, etc.</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="kodi"><a href="https://github.com/jellyfin/jellyfin-kodi">Kodi</a></h2>
+<ol>
+<li>jellyfin_kodi
+<ul>
+<li>database: <code>manipulating the local Jellyfin sqlite database</code></li>
+<li>dialogs: <code>code behind popup menus for user interaction</code></li>
+<li>entrypoint: <code>main add-on settings page</code></li>
+<li>helper: <code>small helper functions, mostly formatting or reused functions</code></li>
+<li>jellyfin: <code>interacting with the server</code></li>
+<li>objects:
+<ul>
+<li>kodi: <code>handling local Kodi media types and database</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>resources:
+<ul>
+<li>language: <code>string files for localization</code></li>
+<li>skins: <code>design of popup menus for user interaction</code></li>
+</ul>
+</li>
+</ol>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

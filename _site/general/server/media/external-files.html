@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>External files | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="External files | myhelp ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="server-media-external-files">
+<h1 id="external-files">External files</h1>
+
+<p>Audio and subtitles will usually be embedded within your video container file (e.g. mkv), but the server also supports loading audio and subtitle streams from external files.
+The server supports reading either single files or containers like mka (Matroska Audio) or mks (Matroska Subtitle) with one or more streams.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>External audio files and containers are supported on Jellyfin 10.8 and later.</p>
+</div>
+<h2 id="naming">Naming</h2>
+<p>Jellyfin will search for external files that exactly match the video filename.
+They can optionally include a language which will only be used if the language cannot be determined from the file metadata.</p>
+<p>If multiple languages are defined within the filename the last one will be used and the others ignored.</p>
+<h3 id="simple-example">Simple example</h3>
+<pre><code class="lang-txt">/Movies
+    /Film (1946)
+        Film.mkv
+        Film.vtt
+        Film.aac
+        Film.mka
+        Film.mks
+        Film.en.ac3
+        Film.de.srt
+        Film.en.dts
+        Film.german.ac3
+</code></pre>
+<h3 id="naming-flags">Naming Flags</h3>
+<p>Additional flags can be appended to the filename (separated by the <code>.</code> delimiter) to add metadata. Supported metadata and flags are:</p>
+<ul>
+<li>Default: <code>default</code>
+<ul>
+<li>Marks the stream as the default.</li>
+</ul>
+</li>
+<li>Forced: <code>forced</code>, <code>foreign</code>
+<ul>
+<li>Marks the subtitle stream as forced, typically used for translation of segments of audio/text that differ from the primary language.</li>
+</ul>
+</li>
+<li>Hearing Impaired (Jellyfin 10.9+): <code>sdh</code>, <code>cc</code>, <code>hi</code>
+<ul>
+<li>Indicates that the subtitle stream has additional information to help viewers that are hearing impaired.</li>
+</ul>
+</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p><code>hi</code> collides with the Hindi language abbreviation. <code>hi</code> by itself will resolve as a Hindi language track, while <code>hi</code> in conjunction with another language identifier (such as <code>title.en.hi.srt</code>) will use the other language and tag it as hearing impaired.</p>
+</div>
+<p>Flags are ignored on containers with more than one stream.</p>
+<p>Any arbitrary text not parsable to a language or flag will be combined and used as the title of the stream (if there is not a stream title already embedded in the file metadata).</p>
+<h3 id="extended-example-with-flags-and-stream-title">Extended example with flags and stream title</h3>
+<pre><code class="lang-txt">/Movies
+    /Film (1986)
+        Film.mkv
+        Film.default.srt
+        Film.default.en.forced.ass
+        Film.forced.en.dts
+        Film.en.sdh.srt
+        Film.English Commentary.en.mp3
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The last file will parse to an English mp3 audio stream with the title <code>English Commentary</code>.</p>
+</div>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

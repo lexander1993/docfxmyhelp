@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Storage | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Storage | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="server-storage">
+
+<h2 id="storage">Storage</h2>
+<p>Jellyfin is designed to directly read media from the filesystem. This means to pass a network storage device that is using samba or NFS must be directly mounted to the OS. The Jellyfin database also should be stored locally and not on a network storage device.</p>
+<h3 id="nfs">NFS</h3>
+<p>In case you encounter performance issues where files take a long time to start playing while using NFSv3, you might be running in a issue with .NET locking without NFSv3 having locking enabled.</p>
+<p>To solve this you have the following options:</p>
+<ul>
+<li>Disable .NET locking using DOTNET_SYSTEM_IO_DISABLEFILELOCKING (introduced in .NET 6).</li>
+<li>Disable locking for the mount using the nolock option.</li>
+<li>Enable the lock service.</li>
+<li>Use NFSv4 which has built-in lock support.</li>
+</ul>
+<h2 id="docker-or-vms">Docker or VM's</h2>
+<p>For storage, a moderate size library database can grow anywhere from 10 to 100 GB. The <a class="xref" href="transcoding.html">transcoding</a> folder needs roughly the same size as the original media if it's being transcoded at the same bitrate. A single 50GB Blu-Ray Remux by itself can take up to approximately 60GB or as little as 15GB, depending on the quality selected. If the transcoding folder is held on the same storage as the database, this must be taken into consideration.</p>
+<h2 id="cloud">Cloud</h2>
+<p>A popular choice for cloud storage has been the program <a href="https://rclone.org/downloads/">rclone</a>. It is supported on most Operating Systems. To facilitate combining local and cloud filesystems, rclone can be paired with another program such as <a href="https://github.com/trapexit/mergerfs">mergerfs</a>. For cloud storage, it is recommended to disable image extraction as this requires downloading the entire file to perform this task.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The image extractor can't be <a href="https://github.com/jellyfin/jellyfin/issues/2355">turned off</a> in Jellyfin at the moment which is causing <a href="https://github.com/jellyfin/jellyfin/issues/2600">performance issues</a>.</p>
+</div>
+<ul>
+<li>animostiy22's <a href="https://github.com/animosity22/homescripts">repo</a> about rclone and mergerfs.</li>
+<li>animosity22's <a href="https://github.com/animosity22/homescripts/blob/master/systemd/rclone.service">rclone config</a>.</li>
+</ul>
+<h3 id="mergerfs">MergerFS</h3>
+<p>MergerFS isn't meant for everything, <a href="https://github.com/trapexit/mergerfs#what-should-mergerfs-not-be-used-for">see here</a> for more.</p>
+<ul>
+<li>rclone recommended <a href="https://forum.rclone.org/t/my-best-rclone-config-mount-for-plex/7441">config</a>.</li>
+<li>animosity22's <a href="https://github.com/animosity22/homescripts/blob/master/systemd/gmedia.service">mergerfs config</a>.</li>
+</ul>
+<p>To modify and examine your mergerfs mount, here's a quick <a href="https://zackreed.me/mergerfs-neat-tricks">guide</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

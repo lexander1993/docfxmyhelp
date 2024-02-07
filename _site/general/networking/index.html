@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Networking | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Networking | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="network-index">
+<h1 id="networking">Networking</h1>
+
+<p>This section describes how to get basic connectivity to a Jellyfin server, and also some more advanced networking scenarios.</p>
+<h2 id="connectivity">Connectivity</h2>
+<p>Many clients will automatically discover servers running on the same LAN and display them on login. If you are outside the network when you connect you can type in the complete IP address or domain name in the server field with the correct port to continue to the login page. You can find the default ports below to access the web frontend.</p>
+<p>HTTP and HTTPS are the primary means of connecting to the server. If using a self-signed certificate for HTTPS, some clients may not work such as Chromecast or Roku.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>In order for Chromecast to work on a non-public routable connection, 8.8.8.8 must be blocked on the Chromecast's Gateway. Blocking 8.8.8.8 on your router is the easiest solution to this problem.</p>
+</div>
+<h3 id="port-bindings">Port Bindings</h3>
+<p>This document aims to provide an administrator with knowledge on what ports Jellyfin binds to and what purpose they serve.</p>
+<h4 id="static-ports">Static Ports</h4>
+<ul>
+<li>8096/tcp is used by default for HTTP traffic. You can change this in the dashboard.</li>
+<li>8920/tcp is used by default for HTTPS traffic. You can change this in the dashboard.</li>
+<li>1900/udp is used for service auto-discovery. This is not configurable.</li>
+<li>7359/udp is also used for auto-discovery. This is not configurable.</li>
+</ul>
+<p><strong>HTTP Traffic:</strong> 8096</p>
+<p>The web frontend can be accessed here for debugging SSL certificate issues on your local network. You can modify this setting from the <strong>Networking</strong> page in the settings.</p>
+<p><strong>HTTPS Traffic:</strong> 8920</p>
+<p>This setting can also be modified from the <strong>Networking</strong> page to use a different port.</p>
+<p><strong>Service Discovery:</strong> 1900</p>
+<p>Since client auto-discover would break if this option were configurable, you cannot change this in the settings at this time. DLNA also uses this port and is required to be in the local subnet.</p>
+<p><strong>Client Discovery:</strong> 7359 UDP</p>
+<p>Allows clients to discover Jellyfin on the local network. A broadcast message to this port with <code>Who is JellyfinServer?</code> will get a JSON response that includes the server address, ID, and name.</p>
+<h4 id="dynamic-ports">Dynamic Ports</h4>
+<p>Live TV devices will often use a random UDP port for HDHomeRun devices. The server will select an unused port on startup to connect to these tuner devices.</p>
+<h3 id="monitoring-endpoints">Monitoring Endpoints</h3>
+<p>See <a class="xref" href="monitoring.html">Monitoring</a> for details on the monitoring endpoints that Jellyfin provides.</p>
+<h2 id="self-signed-certificate">Self-Signed Certificate</h2>
+<p><a href="https://www.sslshopper.com/article-most-common-openssl-commands.html">See here for more information.</a></p>
+<p>Create a private key.</p>
+<pre><code class="lang-sh">openssl req -x509 -newkey rsa:4096 -keyout ./privkey.pem -out cert.pem -days 365 -nodes -subj '/CN=jellyfin.lan'
+</code></pre>
+<p>Omit <code>-nodes</code> to set a password interactively.</p>
+<p>Remove <code>-days 365</code> to make it 'permanent'.</p>
+<p>Add <code>-subj '/CN=localhost'</code> to make it not ask interactive questions about content of certificate.</p>
+<p>The above command creates <code>./privkey.pem</code> which will require one more step before use in Jellyfin.</p>
+<pre><code class="lang-sh">openssl pkcs12 -export -out jellyfin.pfx -inkey privkey.pem -in /usr/local/etc/letsencrypt/live/domain.org/cert.pem -passout pass:
+</code></pre>
+<h2 id="running-jellyfin-behind-a-reverse-proxy">Running Jellyfin Behind a Reverse Proxy</h2>
+<p>It's possible to run Jellyfin behind another server acting as a reverse proxy.  With a reverse proxy setup, this server handles all network traffic and proxies it back to Jellyfin. This provides the benefits of using DNS names and not having to remember port numbers, as well as easier integration and management of SSL certificates.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>In order for a reverse proxy to have the maximum benefit, you should have a publically routable IP address and a domain with DNS set up correctly.
+These examples assume you want to run Jellyfin under a sub-domain (e.g. jellyfin.example.com), but are easily adapted for the root domain if desired.</p>
+</div>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Be careful when logging requests with your reverse proxy. Jellyfin sometimes sends authentication information as part of the URL (e.g <code>api_key</code> parameter), so logging the full request
+path can expose secrets to your logfile. We recommend that you either protect your logfiles or do not log full request URLs or censor sensitive data from the logfile.
+The nginx documentation below includes an example how to censor sensitive information from a logfile.</p>
+</div>
+<p>Some popular options for reverse proxy systems are <a href="https://httpd.apache.org">Apache</a>, <a href="https://caddyserver.com">Caddy</a>, <a href="https://www.haproxy.com">Haproxy</a>, <a href="https://www.nginx.com">Nginx</a> and <a href="https://traefik.io">Traefik</a>.</p>
+<ul>
+<li><a class="xref" href="apache.html">Apache</a></li>
+<li><a class="xref" href="caddy.html">Caddy</a></li>
+<li><a class="xref" href="haproxy.html">HAProxy</a></li>
+<li><a class="xref" href="nginx.html">Nginx</a></li>
+<li><a class="xref" href="traefik.html">Traefik</a></li>
+</ul>
+<p>While not a reverse proxy, Let's Encrypt can be used independently or with a reverse proxy to provide SSL certificates.</p>
+<ul>
+<li><a class="xref" href="letsencrypt.html">Let's Encrypt</a></li>
+</ul>
+<p>When following this guide, be sure to replace the following variables with your information.</p>
+<ul>
+<li><code>DOMAIN_NAME</code>: Your public domain name to access Jellyfin on (e.g. jellyfin.example.com)</li>
+<li><code>example.com</code>: The domain name Jellyfin services will run under (e.g. example.com)</li>
+<li><code>SERVER_IP_ADDRESS</code>: The IP address of your Jellyfin server (if the reverse proxy is on the same server use 127.0.0.1)</li>
+</ul>
+<p>In addition, the examples are configured for use with Let's Encrypt certificates. If you have a certificate from another source, change the SSL configuration from <code>/etc/letsencrypt/DOMAIN_NAME/</code> to the location of your certificate and key.</p>
+<p>Ports 80 and 443 (pointing to the proxy server) need to be opened on your router and firewall.</p>
+<h3 id="known-proxies">Known Proxies</h3>
+<p>Add the IP address/hostname of your reverse proxy to the <code>Known Proxies</code> (under Admin Dashboard -&gt; Networking).  This is a comma separated list of IP addresses/hostnames of known proxies used when connecting to your Jellyfin instance and is required to make proper use of X-Forwarded-For headers. Requires a server restart after saving.</p>
+<h3 id="base-url">Base URL</h3>
+<p>Running Jellyfin with a path (e.g. <code>https://example.com/jellyfin</code>) is supported by the Android and web clients.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Base URL is known to break HDHomeRun, DLNA, Sonarr, Radarr, Chromecast, and MrMC.</p>
+</div>
+<p>The Base URL setting in the <strong>Networking</strong> page is an advanced setting used to specify the URL prefix that your Jellyfin instance can be accessed at. In effect, it adds this URL fragment to the start of any URL path. For instance, if you have a Jellyfin server at <code>http://myserver</code> and access its main page <code>http://myserver/web/index.html</code>, setting a Base URL of <code>/jellyfin</code> will alter this main page to <code>http://myserver/jellyfin/web/index.html</code>. This can be useful if administrators want to access multiple Jellyfin instances under a single domain name, or if the Jellyfin instance lives only at a subpath to another domain with other services listening on <code>/</code>.</p>
+<p>The entered value on the configuration page will be normalized to include a leading <code>/</code> if this is missing.</p>
+<p>This setting requires a server restart to change, in order to avoid invalidating existing paths until the administrator is ready.</p>
+<p>There are three main caveats to this setting.</p>
+<ol>
+<li><p>When setting a new Base URL (i.e. from <code>/</code> to <code>/baseurl</code>) or changing a Base URL (i.e. from <code>/baseurl</code> to <code>/newbaseurl</code>), the Jellyfin web server will automatically handle redirects to avoid displaying users invalid pages. For instance, accessing a server with a Base URL of <code>/jellyfin</code> on the <code>/</code> path will automatically append the <code>/jellyfin</code> Base URL. However, entirely removing a Base URL (i.e. from <code>/baseurl</code> to <code>/</code>, an empty value in the configuration) will not - all URLs with the old Base URL path will become invalid and throw 404 errors. This should be kept in mind when removing an existing Base URL.</p>
+</li>
+<li><p>Client applications generally, for now, do not handle the Base URL redirects implicitly. Therefore, for instance in the Android app, the <code>Host</code> setting <em>must</em> include the BaseURL as well (e.g. <code>http://myserver:8096/baseurl</code>), or the connection will fail.</p>
+</li>
+<li><p>Any reverse proxy configurations must be updated to handle a new Base URL. Generally, passing <code>/</code> back to the Jellyfin instance will work fine in all cases and the paths will be normalized, and this is the standard configuration in our examples. Keep this in mind however when doing more advanced routing.</p>
+</li>
+</ol>
+<h3 id="final-steps">Final Steps</h3>
+<p>It's strongly recommend that you check your SSL strength and server security at <a href="https://www.ssllabs.com/ssltest/analyze.html">SSLLabs</a> if you are exposing these services to the internet.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

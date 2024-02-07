@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Migrating | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Migrating | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="admin-migrate">
+<h1 id="migrating">Migrating</h1>
+
+<p>It is possible to migrate your system to another system by using environment variables.
+It's possible to do this via the command line or by using Docker environment variables.
+To read more, see the <a href="https://jellyfin.org/docs/general/administration/configuration.html">Configuration</a> page.</p>
+<h2 id="watched-status-migration">Watched Status Migration</h2>
+<p>There are scripts available that will use the API to copy watched status and users from one instance to another.
+This can be done from Plex, Emby or another Jellyfin instance.</p>
+<p><a href="https://github.com/CobayeGunther/Emby2Jelly">Emby/Jellyfin to Jellyfin migration</a></p>
+<p><a href="https://github.com/wilmardo/migrate-plex-to-jellyfin">Plex to Jellyfin migration</a></p>
+<h2 id="migrating-linux-install-to-docker">Migrating Linux install to Docker</h2>
+<p>It's possible to use the data of a local install in the official docker image by mapping files and folders to the same locations and configuring the image accordingly.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You need to have exactly matching paths for your files inside the docker container!
+This means that if your media is stored at <code>/media/raid/</code> this path needs to be accessible at <code>/media/raid/</code> inside the docker container too - the configurations below do include examples.</p>
+</div>
+<p>To guarantee proper permissions, get the <code>uid</code> and <code>gid</code> of the local user Jellyfin runs as (on a default install this is the <code>jellyfin</code> system user).
+You can do this by running the following command:</p>
+<pre><code class="lang-sh">   id jellyfin
+</code></pre>
+<p>You need to replace the <code>&lt;uid&gt;:&lt;gid&gt;</code> placeholder below with the correct values.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>To properly map the folders for your install, go to <code>Dashboard &gt; Paths</code>.</p>
+</div>
+<h3 id="using-docker-cli">Using docker cli</h3>
+<pre><code class="lang-sh">docker run -d \
+    --user &lt;uid&gt;:&lt;gid&gt; \
+    -e JELLYFIN_CACHE_DIR=/var/cache/jellyfin \
+    -e JELLYFIN_CONFIG_DIR=/etc/jellyfin \
+    -e JELLYFIN_DATA_DIR=/var/lib/jellyfin \
+    -e JELLYFIN_LOG_DIR=/var/log/jellyfin \
+    --mount type=bind,source=/etc/jellyfin,target=/etc/jellyfin \
+    --mount type=bind,source=/var/cache/jellyfin,target=/var/cache/jellyfin \
+    --mount type=bind,source=/var/lib/jellyfin,target=/var/lib/jellyfin \
+    --mount type=bind,source=/var/log/jellyfin,target=/var/log/jellyfin \
+    --mount type=bind,source=&lt;/path/to/media&gt;,target=&lt;/path/to/media&gt; \
+    --net=host \
+    --restart=unless-stopped \
+    jellyfin/jellyfin
+</code></pre>
+<h3 id="using-docker-compose-yaml">Using docker-compose yaml</h3>
+<pre><code class="lang-yml">version: &quot;3&quot;
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    user: &lt;uid&gt;:&lt;gid&gt;
+    network_mode: &quot;host&quot;
+    restart: &quot;unless-stopped&quot;
+    environment:
+      - JELLYFIN_CACHE_DIR=/var/cache/jellyfin
+      - JELLYFIN_CONFIG_DIR=/etc/jellyfin
+      - JELLYFIN_DATA_DIR=/var/lib/jellyfin
+      - JELLYFIN_LOG_DIR=/var/log/jellyfin
+    volumes:
+      - /etc/jellyfin:/etc/jellyfin
+      - /var/cache/jellyfin:/var/cache/jellyfin
+      - /var/lib/jellyfin:/var/lib/jellyfin
+      - /var/log/jellyfin:/var/log/jellyfin
+      - &lt;path-to-media&gt;:&lt;path-to-media&gt;
+</code></pre>
+<h2 id="migrating-from-emby-352-to-jellyfin">Migrating From Emby 3.5.2 to Jellyfin</h2>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Direct database migration from Emby (of any version) to Jellyfin is NOT SUPPORTED.
+We have found many subtle bugs due to the inconsistent database schemas that result from trying to do this, and strongly recommend that all Jellyfin users migrating from Emby start with a fresh database and library scan.</p>
+</div>
+<p>The original procedure is provided below for reference however we cannot support it nor guarantee that a system upgraded in this way will work properly, if at all.
+If anyone is interested in writing a database migration script which will correct the deficiencies in the existing database and properly import them into Jellyfin, <a class="xref" href="../contributing/index.html">we would welcome it however</a>!</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>While it is technically possible to migrate existing configuration of Emby version 3.5.2 or earlier, due to subtle and weird bugs reported after such attempts we do not recommend this migration.
+Emby versions 3.5.3 or 3.6+ cannot be migrated.
+Thus we recommend creating a new Jellyfin configuration and rebuilding your library instead.</p>
+</div>
+<p>Windows users may take advantage of the <code>install-jellyfin.ps1</code> script in the <a href="https://github.com/jellyfin/jellyfin">Jellyfin repository</a> which includes an automatic upgrade option.</p>
+<p>This procedure is written for Debian-based Linux distributions, but can be translated to other platforms by following the same general principles.</p>
+<ol>
+<li><p>Upgrade to Emby version 3.5.2, so that the database schema is fully up-to-date and consistent.
+While this is not required, it can help reduce the possibility of obscure bugs in the database.</p>
+</li>
+<li><p>Stop the <code>emby-server</code> daemon:</p>
+<pre><code class="lang-sh">sudo service emby-server stop
+</code></pre>
+</li>
+<li><p>Move your existing Emby data directory out of the way:</p>
+<pre><code class="lang-sh">sudo mv /var/lib/emby /var/lib/emby.backup
+</code></pre>
+</li>
+<li><p>Remove or purge the <code>emby-server</code> package:</p>
+<pre><code class="lang-sh">sudo apt purge emby-server
+</code></pre>
+</li>
+<li><p>Install the <code>jellyfin</code> package using the <a class="xref" href="installing.html">installation instructions</a>.</p>
+</li>
+<li><p>Stop the <code>jellyfin</code> daemon:</p>
+<pre><code class="lang-sh">sudo service jellyfin stop
+</code></pre>
+</li>
+<li><p>Copy over all the data files from the Emby backup data directory:</p>
+<pre><code class="lang-sh">sudo cp -a /var/lib/emby.backup/* /var/lib/jellyfin/
+</code></pre>
+</li>
+<li><p>Correct ownership on the new data directory:</p>
+<pre><code class="lang-sh">sudo chown -R jellyfin:jellyfin /var/lib/jellyfin
+</code></pre>
+</li>
+<li><p>Mark Startup Wizard as completed - if not marked as completed then it can be a security risk especially if remote access is enabled:</p>
+<pre><code class="lang-sh">sudo sed -i '/IsStartupWizardCompleted/s/false/true/' /etc/jellyfin/system.xml
+</code></pre>
+</li>
+<li><p>Start the <code>jellyfin</code> daemon:</p>
+</li>
+</ol>
+<pre><code class="lang-sh">sudo service jellyfin start
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

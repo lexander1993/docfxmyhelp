@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Kodi | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Kodi | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="clients-kodi">
+<h1 id="kodi">Kodi</h1>
+
+<h2 id="add-on-repository">Add-on Repository</h2>
+<p>There are two different Kodi add-ons that serve slightly different use cases.</p>
+<ul>
+<li><a href="https://github.com/jellyfin/jellyfin-kodi">Jellyfin for Kodi</a> - This add-on syncs metadata from selected Jellyfin libraries into the local Kodi database. This has the effect of making interacting with it feel very much like vanilla Kodi with local media (shows up under Movies/TV Shows on the home screen by default, virtually no delay, etc). However, it also tends to consume the database and not share well, so if you have local media or something else that interacts with the database directly, you'll have conflicts and it won't be happy. The sync process can take some extra time on Kodi startup if you don't leave it running 24/7, but it's mostly in the background while Kodi is running.</li>
+<li><a href="https://github.com/jellyfin/jellycon">JellyCon</a> - Behaves more like a standard Kodi streaming add-on. Media is accessed primarily by going through the Add-ons -&gt; JellyCon menu, however you can set up menu options to link to it and show info on the home screen. It also allows easier switching between multiple Jellyfin servers or users since it doesn't have to rely on syncing all the metadata down. By not having metadata synced, it has to request info from the server which can take a bit more time when you're browsing (typically only a second or two in my testing), but you don't have to wait for the database to sync or keep it up to date.</li>
+</ul>
+<h3 id="install-add-on-repository">Install Add-on Repository</h3>
+<p>The most convenient install method of our Jellyfin add-ons is to use the official Kodi Jellyfin Repository.  Using this repository allows for easy install of our add-ons, as well as automatically keeping the add-ons up to date with the latest version.  Any other Jellyfin related add-ons that may be built in the future will also be available here.</p>
+<p>The installation method for the repository varies depending on what kind of device you're using, outlined below.</p>
+<h4 id="general-use-devices-pcs-and-tablets">General Use Devices (PCs and Tablets)</h4>
+<ol>
+<li>Download the repository installer found <a href="https://kodi.jellyfin.org/repository.jellyfin.kodi.zip">here</a>.
+<ul>
+<li>It will be saved as <code>repository.jellyfin.kodi.zip</code></li>
+</ul>
+</li>
+<li>Install the Jellyfin repository.
+<ul>
+<li>Open Kodi, go to the settings menu,  and navigate to &quot;Add-on Browser&quot;</li>
+<li>Select &quot;Install from Zip File&quot;
+<ul>
+<li>If prompted, enter settings and enable &quot;Unknown Sources&quot;, then go back to the Add-on Browser</li>
+</ul>
+</li>
+<li>Select the newly downloaded file and it will be installed</li>
+</ul>
+</li>
+</ol>
+<h4 id="embedded-devices-android-tv-firestick-and-other-tv-boxes">&quot;Embedded&quot; Devices (Android TV, Firestick, and other TV Boxes)</h4>
+<ol>
+<li>Open Kodi, go to the settings menu, and navigate to &quot;File manager&quot;
+<ul>
+<li>Select &quot;Add source&quot;</li>
+<li>In the text box, enter <code>https://kodi.jellyfin.org</code></li>
+<li>Enter a name for the data source, such as &quot;Jellyfin Repo&quot; and select Ok</li>
+</ul>
+</li>
+<li>From the settings menu, navigate to &quot;Add-on Browser&quot;
+<ul>
+<li>Select &quot;Install from Zip File&quot;
+<ul>
+<li>If prompted, enter settings and enable &quot;Unknown Sources&quot;, then go back to the Add-on Browser</li>
+</ul>
+</li>
+<li>Select the data source you just added</li>
+<li>Install <code>repository.jellyfin.kodi.zip</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="jellyfin-for-kodi">Jellyfin for Kodi</h2>
+<div class="TIP">
+<h5>Tip</h5>
+<p>It's highly recommended to install the <code>Kodi Sync Queue</code> plugin into the Jellyfin server as well.
+This will keep your media libraries up to date without waiting for a periodic re-sync from Kodi.</p>
+</div>
+<div class="CAUTION">
+<h5>Caution</h5>
+<p>Remote Kodi databases, like MySQL, are not supported. A local SQLite database is required (this is the default).</p>
+</div>
+<h3 id="jellyfin-for-kodi-overview">Jellyfin for Kodi Overview</h3>
+<p>This add-on syncs metadata from selected Jellyfin libraries into the local Kodi database. This has the effect of making interacting with it feel very much like vanilla Kodi with local media.  This means that our Jellyfin content will be displayed on the home screen under the proper media headings by default, it has virtually no delay while interacting with the library, etc. However, it also assumes that it's the only media source and in largely incompatible with other media sources that interact with Kodi's database.</p>
+<p>Media in Kodi's database is automatically kept in sync with the server in one of several ways:</p>
+<ul>
+<li>Startup sync - Each time Kodi starts, it will reach out to the Kodi Sync Queue plugin in the server and request all updated media since it's last checkin time (when Kodi was last shut down)</li>
+<li>Live sync - This happens while Kodi is running.  When the server updates an item, it will send a notification to Kodi over a websocket connection that it has new media that needs to be updated.</li>
+</ul>
+<h3 id="install-jellyfin-for-kodi-add-on">Install Jellyfin for Kodi Add-on</h3>
+<ol>
+<li>Install Jellyfin for Kodi.
+<ul>
+<li>From within Kodi, navigate to &quot;Add-on Browser&quot;</li>
+<li>Select &quot;Install from Repository&quot;</li>
+<li>Choose &quot;Kodi Jellyfin Add-ons&quot;, followed by &quot;Video Add-ons&quot;</li>
+<li>Select the Jellyfin add-on and choose install</li>
+</ul>
+</li>
+<li>Within a few seconds you should be prompted for your server details.
+<ul>
+<li>If a Jellyfin server is detected on your local network, it will displayed in a dialog</li>
+<li>If a Jellyfin server is not detected on your local network, select &quot;Manually Add Server&quot;.  Enter your server info into the text field.
+<ul>
+<li>Enter the server name or IP address and the port number (default value is 8096)
+<ul>
+<li>Host: <code>192.168.1.10:8096</code></li>
+</ul>
+</li>
+<li>If using SSL and a reverse proxy, enter the full URL in the &quot;Host&quot; field
+<ul>
+<li>Host: <code>https://jellyfin.example.com</code></li>
+</ul>
+</li>
+<li>Note that if you have a baseurl set, you should append that value to the end of the host field.
+<ul>
+<li>Host: <code>192.168.0.10:8096/jellyfin</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Select user account and input password, or select &quot;Manual Login&quot; and fill in your user information</li>
+</ul>
+</li>
+<li>Once you're successfully authenticated with the server, you'll be asked about which mode you'd like to use, Add-on vs Native, which are outlined below.</li>
+</ol>
+<h4 id="add-on-mode">Add-on Mode</h4>
+<p>Add-on mode uses the Jellyfin server to translate media files from the filesystem to Kodi.  This is the default setting for the add-on, and is sufficient for most use cases.  It will work both on the local network and over the Internet through a reverse proxy or VPN connection.  Providing network speed is sufficient, Kodi will direct play nearly all files and put little overhead on the Jellyfin server.</p>
+<p>To use Add-on mode, simply choose &quot;Add-on&quot; at the dialog and proceed to <a class="xref" href="kodi.html#library-syncing">Library Syncing</a></p>
+<h4 id="native-mode">Native Mode</h4>
+<p>Native mode accesses your media files directly from the filesystem, bypassing the Jellyfin server during playback.  Native mode needs more setup and configuration, but it can, on rare occasions, lead to better performance where network bandwidth is a limitation.  It requires your media to be available to the device Kodi is running on over either NFS or Samba, and therefore should only be used on a LAN or over a VPN connection.</p>
+<p>To use Native mode, first set up your libraries in Jellyfin with a remote path.</p>
+<ol>
+<li>In the Jellyfin server, navigate to the Libraries section of the admin dashboard.
+<ul>
+<li>Select an existing library (or create a new one)</li>
+<li>Select the media folder</li>
+<li>Enter the path to your network share in the &quot;Shared network folder&quot; textbox</li>
+<li>Possible formats:
+<ul>
+<li>NFS
+<ul>
+<li><code>nfs://192.168.0.10:/path/to/media</code></li>
+</ul>
+</li>
+<li>Samba
+<ul>
+<li>Guest User - <code>\\192.168.0.10\share_name</code></li>
+<li>Custom User (Not Recommended) - <code>\\user:password@192.168.0.10\share_name</code>
+<ul>
+<li>It's more secure to use the generic Guest mapping here and specify credentials from within Kodi</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Mounted share
+<ul>
+<li>If you have mounted your network share, you can reference the local mount point. This can be more performant but generally means it only works for one type of operating system, given the difference between the file systems
+<ul>
+<li><code>/mnt/media</code> (Linux)</li>
+<li><code>Z:\media</code> (Windows)</li>
+<li><code>/Volumes/media</code> (Mac OS)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Configure libraries in Kodi
+<ul>
+<li>Skip the initial library selection.  We need to add file shares to Kodi first</li>
+<li>Within Kodi, navigate to the settings menu and select &quot;File manager&quot;</li>
+<li>Select &quot;Add source&quot;</li>
+<li>Select &quot;Browse&quot; and &quot;Add network location&quot;</li>
+<li>Create either a NFS or SMB location from the selection box and fill in the necessary information about your network share
+<ul>
+<li>If you are using a mounted share, browse to the mount point on your file system rather than the network share</li>
+</ul>
+</li>
+<li>Select your newly created location and choose &quot;Ok&quot;</li>
+<li>Give your media source a name and choose &quot;Ok&quot;</li>
+<li>Go to Add-ons -&gt; Jellyfin -&gt; Manage Libraries -&gt; Add Libraries</li>
+</ul>
+</li>
+<li>Proceed to <a class="xref" href="kodi.html#library-syncing">Library Syncing</a></li>
+</ol>
+<h4 id="library-syncing">Library Syncing</h4>
+<p>This screen allows you to choose which libraries to sync to your Kodi install.  This process will copy metadata for your media into the local Kodi database, allowing you to browse through your media libraries as if they were native to your device.</p>
+<p>Either choose &quot;All&quot; or select individual libraries you'd like synced, and select OK.  Syncing the metadata will start automatically.  The duration of this process varies greatly depending on the size of your library, the power of your local device, and the connection speed to the server.</p>
+<p>You can still access any libraries that haven't been synced by going through the Jellyfin add-on menu.  These unsynced libraries will be labeled as &quot;dynamic.&quot;</p>
+<p>If an error occurs during syncing, enable debug logging in the Jellyfin add-on in Kodi and if in a Unix-like OS, set the <strong>log level</strong> of Samba to 2 to see if there are issues authenticating.</p>
+<h3 id="multiple-user-accounts">Multiple User Accounts</h3>
+<p>The Jellyfin for Kodi add-on doesn't natively handle multiple user accounts.  Fortunately, Kodi has a built in method of handling this called profiles.  Information about this can be found on the Profiles page of the <a href="https://kodi.wiki/view/Profiles">Kodi Wiki</a>.  Once profiles have been created, you must install the Jellyfin add-on and go through the installation steps above for each user profile.  When you switch Kodi profiles, you will also switch Jellyfin users. You can tell Kodi to bring you to a profile login screen during startup by going to the Profiles section inside of the Settings page and checking the box for &quot;Show login screen on startup.&quot;</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Kodi's default skin does not display all unicode characters. To display unicode characters the skin's font must be changed.</p>
+</div>
+<h3 id="multiple-clients">Multiple Clients</h3>
+<p>When using multiple Kodi clients do not copy Kodi's database (i.e. <code>myvideosXYZ.db</code>, <code>jellyfin.db</code>) files from one client to the other to try and reduce initial syncing time. This will partially work, but it will cause conflicts between clients and the sync process from the server won't work properly.</p>
+<h2 id="jellycon">JellyCon</h2>
+<h3 id="jellycon-overview">JellyCon Overview</h3>
+<p>JellyCon behaves more like a standard Kodi streaming add-on. Media is accessed primarily by going through the Add-ons -&gt; JellyCon menu, however depending on what skin is being used custom shortcuts and widgets can be added to the home menu. It also allows easier switching between multiple Jellyfin servers or users since it doesn't have to rely on syncing all the metadata down. By not having metadata synced, it has to request info from the server which can take a bit more time when you're browsing, but you don't have to wait for the database to sync or keep it up to date. It's also compatible with other media sources and can be used with other add-ons without issue.</p>
+<h3 id="install-jellycon-add-on">Install JellyCon Add-on</h3>
+<ol>
+<li>Install JellyCon Add-on
+<ul>
+<li>From within Kodi, navigate to &quot;Add-on Browser&quot;</li>
+<li>Select &quot;Install from Repository&quot;</li>
+<li>Choose &quot;Kodi Jellyfin Add-ons&quot;, followed by &quot;Video Add-ons&quot;</li>
+<li>Select the JellyCon add-on and choose install</li>
+</ul>
+</li>
+<li>Within a few seconds you should be prompted for your server details.
+<ul>
+<li>If a Jellyfin server is detected on your local network, it will displayed in a dialog.  Otherwise, you will be prompted for a URL</li>
+<li>Select a user from the list, or Manual Login to type in a username/password</li>
+</ul>
+</li>
+</ol>
+<h3 id="configuring-home">Configuring Home</h3>
+<p>Many Kodi skins allow for customizing of the home menu with custom nodes and widgets.  However, all of these use slightly different layouts and terminology.  Rather than a step by step guide, this section serves as an barebones introduction to customizing a skin.</p>
+<h4 id="examples">Examples</h4>
+<p>If you would like a link on the home screen to open a library in your Jellyfin server called &quot;Kid's Movies&quot;, you would point the menu item to the path: <code>Add-On -&gt; Video Add-On -&gt; JellyCon -&gt; Jellyfin Libraries -&gt; Kid's Movies -&gt; Create menu item to here</code>.</p>
+<p>Beyond just modifying where the home menu headers go, many skins also allow you to use widgets.  Widgets help populate the home screen with data, often the posters of media in the selected image.  If you would like to display the most recent movies across all of your Jellyfin libraries on the home screen, the path would be: <code>Add-On -&gt; Video Add-On -&gt; JellyCon -&gt; Global Lists -&gt; Movies -&gt; Movies - Recently Added (20) -&gt; Use as widget</code></p>
+<p>Another common use case of widgets would be to display the next available episodes of shows that you may be watching.  As above, this can be done both with individual libraries or with all libraries combined:</p>
+<ul>
+<li><code>Add-On -&gt; Video Add-On -&gt; JellyCon -&gt; Jellyfin Libraries -&gt; Anime -&gt; Anime - Next Up (20) -&gt; Use as widget</code></li>
+<li><code>Add-On -&gt; Video Add-On -&gt; JellyCon -&gt; Global Lists -&gt; TV Shows -&gt; TV Shows - Next Up (20) -&gt; Use as widget</code></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

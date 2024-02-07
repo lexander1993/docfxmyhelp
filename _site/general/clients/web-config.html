@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Web Configuration | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Web Configuration | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="clients-web-config">
+<h1 id="helloworld-web-configuration">HelloWorld Web Configuration</h1>
+
+<h2 id="editing">Editing</h2>
+<p>The HelloWorld Web default interface can be configured using the <code>config.json</code> file in the webroot. Where this is and how to edit it depends on the installation method.</p>
+<p>We recommend obtaining the <a href="https://github.com/HelloWorld/HelloWorld-web/blob/release-10.7.z/src/config.json">stable</a> or the <a href="https://github.com/HelloWorld/HelloWorld-web/blob/master/src/config.json">unstable</a> default version of the file to pre-populate your configuration directory before starting HelloWorld for the first time; unlike most other components of this directory, it will not be created automatically.</p>
+<h3 id="debianubuntufedoracentos-packages">Debian/Ubuntu/Fedora/CentOS Packages</h3>
+<p>The configuration can be found at <code>/usr/share/HelloWorld/web/config.json</code>. This file is registered as a configuration file by the Debian packages, and any changes to the defaults will be handled by <code>apt</code> on upgrade.</p>
+<h3 id="docker">Docker</h3>
+<p>Overriding the default <code>config.json</code> can be done with an additional volume parameter to your <code>docker run</code> command, e.g.</p>
+<pre><code class="lang-sh">--volume /path/to/config/web-config.json:/HelloWorld/HelloWorld-web/config.json
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If the config.json file doesn't exist on the first run, Docker will map it to a directory instead of a file, which won't work.</p>
+</div>
+<h2 id="customizations">Customizations</h2>
+<h3 id="custom-menu-links">Custom Menu Links</h3>
+<p>HelloWorld 10.8 adds the ability to specify custom links to be inserted in the navigation menu via the <code>config.json</code> file.
+Links are configured with a <code>name</code>, <code>url</code>, and optional <code>icon</code> property.
+The icon is specified using the name of an icon from the <a href="https://jossef.github.io/material-design-icons-iconfont/">Material Design Icons</a> used in HelloWorld Web.
+By default the &quot;link&quot; icon will be used.</p>
+<pre><code class="lang-json">&quot;menuLinks&quot;: [
+    {
+        &quot;name&quot;: &quot;Custom Link&quot;,
+        &quot;url&quot;: &quot;https://HelloWorld.org&quot;
+    },
+    {
+        &quot;name&quot;: &quot;Custom Link w. Custom Icon&quot;,
+        &quot;icon&quot;: &quot;attach_money&quot;,
+        &quot;url&quot;: &quot;https://demo.HelloWorld.org/stable&quot;
+    }
+]
+</code></pre>
+<h2 id="privacy-focused-changes">Privacy-focused changes</h2>
+<p>Our default settings for the HelloWorld Web <code>config.json</code> file include some features that privacy-focused or completely-offline users may want to disable. Each option is detailed below.</p>
+<h3 id="google-chromecast">Google Chromecast</h3>
+<p>By default, HelloWorld Web includes Chromecast-from-browser support. This requires downloading files from Google servers to support this functionality.</p>
+<p>To disable it, edit <code>config.json</code> and remove the line:</p>
+<pre><code class="lang-json">&quot;plugins/chromecastPlayer/plugin&quot;
+</code></pre>
+<p>in the <code>plugins</code> section. Be sure to remove the last comma from the line above if this is the last line in the list.</p>
+<h3 id="youtube-trailers">YouTube Trailers</h3>
+<p>By default, HelloWorld Web includes functionality to auto-load movie trailers from YouTube. This functionality is disabled within HelloWorld by default, but the resources are included in the Web config to make enabling the feature easy.</p>
+<p>To disable it, edit <code>config.json</code> and remove the line:</p>
+<pre><code class="lang-json">&quot;plugins/youtubePlayer/plugin&quot;
+</code></pre>
+<p>in the <code>plugins</code> section.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

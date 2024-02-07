@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Apache | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Apache | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="network-reverse-proxy-apache">
+
+<h2 id="apache-http-server-project">Apache HTTP Server Project</h2>
+<p>&quot;The <a href="https://httpd.apache.org/">Apache HTTP Server Project</a> is an effort to develop and maintain an open-source HTTP server for modern operating systems including UNIX and Windows. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.&quot;</p>
+<pre><code class="lang-conf">&lt;VirtualHost *:80&gt;
+    ServerName DOMAIN_NAME
+
+    # Comment to prevent HTTP to HTTPS redirect
+    Redirect permanent / https://DOMAIN_NAME
+
+    ErrorLog /var/log/apache2/DOMAIN_NAME-error.log
+    CustomLog /var/log/apache2/DOMAIN_NAME-access.log combined
+&lt;/VirtualHost&gt;
+
+# If you are not using a SSL certificate, replace the 'redirect'
+# line above with all lines below starting with 'Proxy'
+&lt;IfModule mod_ssl.c&gt;
+&lt;VirtualHost *:443&gt;
+    ServerName DOMAIN_NAME
+    # This folder exists just for certbot(You may have to create it, chown and chmod it to give apache permission to read it)
+    DocumentRoot /var/www/html/jellyfin/public_html
+
+    ProxyPreserveHost On
+
+    # Letsencrypt's certbot will place a file in this folder when updating/verifying certs
+    # This line will tell apache to not to use the proxy for this folder.
+    ProxyPass &quot;/.well-known/&quot; &quot;!&quot;
+    
+    # Tell Jellyfin to forward that requests came from TLS connections
+    RequestHeader set X-Forwarded-Proto &quot;https&quot;
+    RequestHeader set X-Forwarded-Port &quot;443&quot;
+
+    ProxyPass &quot;/socket&quot; &quot;ws://SERVER_IP_ADDRESS:8096/socket&quot;
+    ProxyPassReverse &quot;/socket&quot; &quot;ws://SERVER_IP_ADDRESS:8096/socket&quot;
+
+    ProxyPass &quot;/&quot; &quot;http://SERVER_IP_ADDRESS:8096/&quot;
+    ProxyPassReverse &quot;/&quot; &quot;http://SERVER_IP_ADDRESS:8096/&quot;
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/DOMAIN_NAME/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/DOMAIN_NAME/privkey.pem
+    Protocols h2 http/1.1
+
+    # Enable only strong encryption ciphers and prefer versions with Forward Secrecy
+    SSLCipherSuite HIGH:RC4-SHA:AES128-SHA:!aNULL:!MD5
+    SSLHonorCipherOrder on
+
+    # Disable insecure SSL and TLS versions
+    SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+
+    ErrorLog /var/log/apache2/DOMAIN_NAME-error.log
+    CustomLog /var/log/apache2/DOMAIN_NAME-access.log combined
+&lt;/VirtualHost&gt;
+&lt;/IfModule&gt;
+</code></pre>
+<p>If you encouter errors, you may have to enable <code>mod_proxy</code>, <code>mod_ssl</code>, <code>proxy_wstunnel</code>, <code>http2</code> and <code>remoteip</code> support manually.</p>
+<pre><code class="lang-bash">sudo a2enmod proxy proxy_http ssl proxy_wstunnel remoteip http2
+</code></pre>
+<h2 id="apache-with-subpath-exampleorgjellyfin">Apache with Subpath (example.org/jellyfin)</h2>
+<p>When connecting to server from a client application, enter <code>http(s)://DOMAIN_NAME/jellyfin</code> in the address field.</p>
+<p>Set the <a class="xref" href="index.html#base-url">base URL</a> field in the Jellyfin server.  This can be done by navigating to the Admin Dashboard -&gt; Networking -&gt; Base URL in the web client.  Fill in this box with <code>/jellyfin</code> and click Save.  The server will need to be restarted before this change takes effect.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>HTTP is insecure. The following configuration is provided for ease of use only. If you are planning on exposing your server over the Internet you should setup HTTPS. <a href="https://letsencrypt.org/getting-started/">Let's Encrypt</a> can provide free TLS certificates which can be installed easily via <a href="https://certbot.eff.org/">certbot</a>.</p>
+</div>
+<p>The following configuration can be saved in <code>/etc/httpd/conf/extra/jellyfin.conf</code> and included in your vhost.</p>
+<pre><code class="lang-conf"># Jellyfin hosted on http(s)://DOMAIN_NAME/jellyfin
+&lt;Location /jellyfin/socket&gt;
+    ProxyPreserveHost On
+    ProxyPass &quot;ws://127.0.0.1:8096/jellyfin/socket&quot;
+    ProxyPassReverse &quot;ws://127.0.0.1:8096/jellyfin/socket&quot;
+&lt;/Location&gt;
+&lt;Location /jellyfin&gt;
+    ProxyPass &quot;http://127.0.0.1:8096/jellyfin&quot;
+    ProxyPassReverse &quot;http://127.0.0.1:8096/jellyfin&quot;
+&lt;/Location&gt;
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Shows | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Shows | myhelp ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="server-media-shows">
+<h1 id="shows">Shows</h1>
+
+<p>The most common naming scheme for shows is categorizing the files by series and then season. Another common method is simply using series folders, especially for shows that are organized by air date and those without seasons. Adding the year at the end in parentheses will yield the best results when scraping metadata.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>In order to help with identifying a series, Jellyfin can make use of media provider identifiers. This can be specified in your show's folder name, for example: <code>Series (2010) [imdbid-tt0106145]</code> or <code>Series (2018) [tmdbid-65567]</code></p>
+</div>
+<pre><code class="lang-txt">Shows
+├── Series (2010)
+│   ├── Season 00
+│   │   ├── Some Special.mkv
+│   │   ├── Episode S00E01.mkv
+│   │   └── Episode S00E02.mkv
+│   ├── Season 01
+│   │   ├── Episode S01E01-E02.mkv
+│   │   ├── Episode S01E03.mkv
+│   │   └── Episode S01E04.mkv
+│   └── Season 02
+│       ├── Episode S02E01.mkv
+│       └── Episode S02E02.mkv
+└── Series (2018)
+    ├── Episode S01E01.mkv
+    ├── Episode S01E02.mkv
+    ├── Episode S02E01-E02.mkv
+    └── Episode S02E03.mkv
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Avoid special characters such as * in M*A*S*H, use MASH instead.</p>
+</div>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Season folders shouldn't contain the series name, otherwise Jellyfin can in certain cases (Stargate SG-1 due to the dash and one, for instance) misdetect your episodes and put them all under the same season.</p>
+</div>
+<h2 id="show-extras">Show Extras</h2>
+<p>Show extras, sometimes called specials, can be added in the <code>Season 00</code> folder. If supported by your metadata provider those files will be matched. In case your metadata provider does not provide information about the extra, it is recommended to use a name which describes the content of the special instead of naming it <code>Episode S00Exy.mkv</code>. This is done to avoid wrong metadata being pulled for the extra and to provide a proper presentation.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Episode numbering for specials may vary from metadata provider to metadata provider.</p>
+</div>
+<h2 id="images">Images</h2>
+<p>Posters, Backdrops, and Logos may also be embedded into video containers that support it (such as mkv) and will be read out by the <code>Embedded Image Extractor</code> if enabled as an <code>Image Extractor</code> on the library configuration page.</p>
+<h3 id="poster">Poster</h3>
+<ul>
+<li>folder.ext</li>
+<li>poster.ext</li>
+<li>cover.ext</li>
+<li>default.ext</li>
+<li>show.ext</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>Series:
+<ul>
+<li>Series (2010)/poster.jpg</li>
+</ul>
+</li>
+<li>Season posters:
+<ul>
+<li>Numbered seasons:
+<ul>
+<li>Series (2010)/Season 01/cover.jpg</li>
+<li>Series (2010)/season1-poster.jpg</li>
+</ul>
+</li>
+<li>Specials:
+<ul>
+<li>Series (2010)/season-specials-poster.jpg</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="backdrop">Backdrop</h3>
+<ul>
+<li>backdrop.ext</li>
+<li>fanart.ext</li>
+<li>background.ext</li>
+<li>art.ext</li>
+<li>extrafanart/*.ext</li>
+</ul>
+<p>Examples:</p>
+<p>Series (2010)/fanart.jpg <em>for the first backdrop image</em></p>
+<p>Series (2010)/extrafanart/fanart1.jpg, Series (2010)/extrafanart/fanart2.jpg, <em>etc for additional backdrop images</em></p>
+<h3 id="banner">Banner</h3>
+<ul>
+<li>banner.ext</li>
+</ul>
+<p>Example:</p>
+<p>Series (2010)/banner.jpg</p>
+<h3 id="thumb">Thumb</h3>
+<ul>
+<li>thumb.ext</li>
+<li>landscape.ext</li>
+</ul>
+<p>Examples:</p>
+<p>Series (2010)/landscape.jpg</p>
+<p>Series (2010)/Season 01/episode filename-thumb.jpg <em>for the thumbnail of an episode named &quot;episode filename.mkv&quot;</em></p>
+<h3 id="logo">Logo</h3>
+<ul>
+<li>logo.ext</li>
+<li>clearlogo.ext</li>
+</ul>
+<p>Example:</p>
+<p>Series (2010)/logo.png</p>
+<h2 id="other">Other</h2>
+<h3 id="theme-videos">Theme Videos</h3>
+<ul>
+<li>backdrops/*</li>
+</ul>
+<p>Example:</p>
+<p>Series (2010)/backdrops/S1Intro.ext</p>
+<h3 id="theme-music">Theme Music</h3>
+<ul>
+<li>theme.ext</li>
+<li>theme-music/*</li>
+</ul>
+<p>Examples:</p>
+<p>Series (2010)/theme.ext</p>
+<p>Series (2010)/theme-music/intro-song.ext</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

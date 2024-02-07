@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>TVHeadend | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="TVHeadend | myhelp ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="server-plugins-tvheadend">
+<h1 id="tvheadend">TVHeadend</h1>
+
+<p>The objective of the guide is to configure the Jellyfin TVHeadend plugin to backend a TVHeadend server.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>TVHeadend server</li>
+<li>Jellyfin server</li>
+<li>TVHeadend plugin installed in Jellyfin</li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<!-- markdownlint-disable MD029 ol-prefix -->
+<ol>
+<li>Create a user for Jellyfin in TVHeadend: it is convenient to create a specific user for Jellyfin.
+<ul>
+<li>Go to Configuration &gt; Users &gt; Access Entries &gt; Add</li>
+<li>Give the user parameters
+<ul>
+<li>Enabled: ✔</li>
+<li>Username: <em>Username</em> (for example: Jellyfin)</li>
+<li>Change parameters: Rights,Channel number range,Channel tags,DVR configurations,Streaming profiles,Connection limits</li>
+<li>Web interface: ✔</li>
+<li>Streaming: Basic,Advanced,HTSP</li>
+<li>Video recoder: Basic,HTSP,View all</li>
+<li>(Optional) Comment: Comment for the user (for example: User used by Jellyfin)</li>
+<li>(Optional) Allowed networks: <em>Network address with network mask to allow</em> (for example 127.0.0.1/32)</li>
+<li>Press Save</li>
+</ul>
+</li>
+<li>Go to Configuration &gt; Users &gt; Passwords &gt; Add</li>
+<li>Give the user parameters
+<ul>
+<li>Enabled: ✔</li>
+<li>Username <em>The user created previously</em> (for example: Jellyfin)</li>
+<li>Password: <em>The password for the user created previously</em> (for example: Jellyfin_password)</li>
+<li>Press Save</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The parameters Change parameters, Streaming and Video recoder must be marked as shown. Otherwise, Jellyfin can connect to TVHeadend but problems may arise when reproducing the content.</p>
+</div>
+<ol start="2">
+<li>Adjust the Jellyfin TVHeadend plugin to establish the connection.
+<ul>
+<li>Go to Dashboard &gt; Plugins &gt; TVHeadend &gt; Settings</li>
+<li>Provide creator access data previously:
+<ul>
+<li>TVHeadend Hostname or IP Address: <em>IP address of the TVHeadend server</em> (for example: 127.0.0.1)</li>
+<li>Username: <em>The user created previously</em> (for example: Jellyfin)</li>
+<li>Password: <em>The password created previously</em> (for example: Jellyfin_password)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>By default the the <em>TVHeadend Hostname or IP Address</em> section is configured by default with the hostname <em>localhost</em>, it is preferable to use the IP address <em>127.0.0.1</em> instead of <em>localhost</em>. <a href="https://emby.media/community/index.php?/topic/55768-tv-headend-plugin-where-does-it-store-data/#entry542181">Reference</a></p>
+</div>
+<ol start="3">
+<li><p>Configure the channels for viewing in Jellyfin: even if Jellyfin manages to connect to TVHeadend, the guide will not be synchronized because there has to be a number assigned to the channels in TVHeadend. <a href="https://emby.media/community/index.php?/topic/64583-no-channels-with-tvheadend-plugin/#entry642268">Reference</a></p>
+<ul>
+<li>Manual mode
+<ul>
+<li>Go to Configuration &gt; Channel/EPG &gt; Channels</li>
+<li>Select the channel to be changed and press Edit</li>
+<li>In the option <em>Number</em> we enter the number that we are going to assign to the channel (for example: 1), this number must be nonzero</li>
+<li>Press save</li>
+</ul>
+</li>
+<li>Automatic mode
+<ul>
+<li>Go to Configuration &gt; DVB Inputs &gt; Networks</li>
+<li>Select the network you want and press Edit</li>
+<li>In the option <em>Channel numbers from</em> we enter the number so we want the numbering of the channels to start (for example: 1), this number must be nonzero</li>
+<li>Press save</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Update the data from the TVHeadend guide to Jellyfin</p>
+<ul>
+<li>Go to Dashboard &gt; Live TV</li>
+<li>Refresh guide data</li>
+</ul>
+</li>
+</ol>
+<!-- markdownlint-enable MD029 ol-prefix -->
+<div class="NOTE">
+<h5>Note</h5>
+<p>If the guide is not updated, restart the Jellyfin server.</p>
+</div>
+<p>Once the update of the guide is finished, the Live TV will already be able to see the guide related to the synchronized channels and will be able to visualize the content.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

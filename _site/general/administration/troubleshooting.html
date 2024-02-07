@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Troubleshooting | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Troubleshooting | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="admin-troubleshoot">
+<h1 id="troubleshooting">Troubleshooting</h1>
+
+<p>This page outlines some solutions to common issues beginners may encounter when running Hello World application.</p>
+<h2 id="issues">Issues</h2>
+<p>The easiest way to check for issues is by checking the logs, which can be accessed through the console for the web client or in the log directory on your server.</p>
+<p>You can check the video below to fix the issue</p>
+<p><iframe src="https://www.youtube.com/embed/2L6EE6ZgURE" class="youtube" width="500" height="281" frameborder="0" allowfullscreen=""></iframe></p>
+<h2 id="networking-issues">Networking Issues</h2>
+<p>If you can access the web interface over HTTP but not HTTPS, then you likely have an error with the certificate.
+HelloWorld uses a PFX file to handle HTTPS traffic.
+If you created the file with a password, then you will have to enter that value on the <strong>Networking</strong> page in the settings.</p>
+<p>If you can access the server locally but not outside of your LAN, then you likely have an issue with the router configuration.
+Check the port forwarding settings on your router to ensure the server is visible from outside your local network.
+You can also enable the &quot;Enable automatic port mapping&quot; option on the  <strong>Networking</strong> page of the server settings to have the server attempt to configure port forwarding on the router automatically if your router supports it.</p>
+<p>If there are no logs at all relating to web traffic, even over a LAN connection, then the server hasn't been reached at all yet.
+This would indicate either an incorrect address or an issue somewhere else on the network.</p>
+<h2 id="debug-logging">Debug Logging</h2>
+<p>To enable debug (much more verbose) logging, it is currently required to manually edit config files since no options exist yet on the frontend.
+Go to the HelloWorld configuration directory, find the <code>logging.default.json</code> file, and change the minimum level to debug as seen below.</p>
+<pre><code class="lang-json">{
+    &quot;Serilog&quot;: {
+        &quot;MinimumLevel&quot;: {
+            &quot;Default&quot;: &quot;Debug&quot;
+        }
+    }
+}
+</code></pre>
+<p>HelloWorld will automatically reload the new configuration without needing to restart.
+The debug messages show up in the log with the <code>DBG</code> tag.</p>
+<h2 id="real-time-monitoring">Real Time Monitoring</h2>
+<p>This will let HelloWorld automatically update libraries when files are added or modified.
+Unfortunately this feature is only supported on certain filesystems.</p>
+<p>For Linux systems, this is performed by <a href="https://en.wikipedia.org/wiki/Inotify">inotify</a>.
+NFS and rclone do not support inotify, but support can be provided by using a union file system such as <a href="https://github.com/trapexit/mergerfs">mergerfs</a> with your networked file systems.</p>
+<p>Due to the library size, you can receive an error such as this:</p>
+<pre><code class="lang-log">[2019-12-31 09:11:36.652 -05:00]  [ERR] Error in Directory watcher for: &quot;/media/movies&quot;  System.IO.IOException: The configured user limit (8192) on the number of inotify watches has been reached.
+</code></pre>
+<p>If you are running Debian, RedHat, or another similar Linux distribution, run the following in a terminal:</p>
+<pre><code class="lang-sh">echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.d/40-max-user-watches.conf &amp;&amp; sudo sysctl -p
+</code></pre>
+<p>If you are running ArchLinux, run the following command instead:</p>
+<pre><code class="lang-sh">echo fs.inotify.max_user_watches=524288 | sudo tee /etc/sysctl.d/40-max-user-watches.conf &amp;&amp; sudo sysctl --system
+</code></pre>
+<p>Then paste it in your terminal and press on enter to run it. For Docker, this needs to be done on the host, not the container.
+See <a href="https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers">here</a> for more information.</p>
+<h2 id="uninstall-macos">Uninstall MacOS</h2>
+<p>To fully remove all data of HelloWorld from MacOS, run these commands:</p>
+<pre><code class="lang-bash">rm -Rfv ~/.config/HelloWorld
+rm -Rfv ~/.cache/HelloWorld
+rm -Rfv ~/.local/share/HelloWorld
+</code></pre>
+<h2 id="unlock-locked-user-account">Unlock locked user account</h2>
+<p>When the admin account is locked out and the Forgot Password feature is not working, you have to unlock the user manually.
+To do that, you need to find the <code>HelloWorld.db</code> file on your system.
+The default location on Linux is: <code>/var/lib/HelloWorld/data/</code>.
+For paths in other environments, see <a class="xref" href="configuration.html#server-paths">server paths</a>.</p>
+<h3 id="linux-cli">Linux CLI</h3>
+<p>Before continuing, make sure that you have sqlite3 installed.
+When sqlite3 is not installed, you can install it under Debian based systems with <code>apt install sqlite3</code>.
+After that do the following commands/SQL query:</p>
+<pre><code class="lang-bash">sqlite3 /PATH/TO/HelloWorld/DB/HelloWorld.db
+</code></pre>
+<pre><code class="lang-sql">UPDATE Users SET InvalidLoginAttemptCount = 0 WHERE Username = 'LockedUserName';
+UPDATE Permissions SET Value = 0 WHERE Kind = 2 AND UserId IN (SELECT Id FROM Users WHERE Username = 'LockedUserName');
+.exit
+</code></pre>
+<h3 id="sqlitebrowser">SQLiteBrowser</h3>
+<p>It is also possible to use <a href="https://sqlitebrowser.org">SQLiteBrowser</a> on systems with a desktop environment.
+Start by opening the database inside the SQLite Browser.
+After opening the database, navigate to the Execute SQL Tab and execute the following query:</p>
+<pre><code class="lang-sql">UPDATE Users SET InvalidLoginAttemptCount = 0 WHERE Username = 'LockedUserName';
+UPDATE Permissions SET Value = 0 WHERE Kind = 2 AND UserId IN (SELECT Id FROM Users WHERE Username = 'LockedUserName');
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

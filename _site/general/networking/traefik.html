@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Traefik v1.x | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Traefik v1.x | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="network-reverse-proxy-traefik">
+
+<h2 id="traefik-v1x">Traefik v1.x</h2>
+<p><a href="https://traefik.io/">Traefik</a> is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy. Traefik integrates with your existing infrastructure components (Docker, Swarm mode, Kubernetes, Marathon, Consul, Etcd, Rancher, Amazon ECS, ...) and configures itself automatically and dynamically. Pointing Traefik at your orchestrator should be the only configuration step you need. This configuration is A+. Test your setup here at <a href="https://www.ssllabs.com/ssltest/">SSLlabs</a>.</p>
+<p>Create docker-compose.yml, traefik.toml and acme.json in the <strong>same</strong> directory or change their paths in the volume section.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Ensure you enable Basic Auth protection for Traefik or disable its Dashboard. Otherwise your Dashboard will be accessible from the internet.</p>
+</div>
+<pre><code class="lang-bash">sudo apt install apache2-utils
+echo $(htpasswd -nb username mystrongpassword) | sed -e s/\\$/\\$\\$/g
+</code></pre>
+<p>This command automatically escapes all <span class="math">\(inside the password for the YML file. If using an environment file, it does not need the\)</span> escaped since it will not be interpreted by the shell.</p>
+<p>Create the docker network for traefik.</p>
+<pre><code class="lang-bash">sudo docker network create traefik
+</code></pre>
+<h3 id="docker-composeyml">docker-compose.yml</h3>
+<pre><code class="lang-yml">version: '3.5'
+networks:
+  traefik:
+    name: traefik
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:v1.7
+    networks:
+      - traefik
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/traefik.toml
+      - ./acme.json:/acme.json
+    labels:
+      traefik.enable: &quot;true&quot;
+      traefik.backend: traefik
+      traefik.docker.network: traefik
+      traefik.port: 8080
+      traefik.frontend.rule: Host:traefik.example.com,
+      traefik.frontend.entryPoints: https
+      traefik.frontend.passHostHeader: &quot;true&quot;
+      traefik.frontend.headers.SSLForceHost: &quot;true&quot;
+      traefik.frontend.headers.SSLHost: traefik.example.com
+      traefik.frontend.headers.SSLRedirect: &quot;true&quot;
+      traefik.frontend.headers.browserXSSFilter: &quot;true&quot;
+      traefik.frontend.headers.contentTypeNosniff: &quot;true&quot;
+      traefik.frontend.headers.forceSTSHeader: &quot;true&quot;
+      traefik.frontend.headers.STSSeconds: 315360000
+      traefik.frontend.headers.STSIncludeSubdomains: &quot;true&quot;
+      traefik.frontend.headers.STSPreload: &quot;true&quot;
+      traefik.frontend.headers.customResponseHeaders: X-Robots-Tag:noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex
+      traefik.frontend.headers.frameDeny: &quot;true&quot;
+      traefik.frontend.headers.customFrameOptionsValue: 'allow-from https://example.com'
+#     traefik.frontend.auth.basic.users: xxx:xxx
+    restart: unless-stopped
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    network_mode: &quot;host&quot;
+    volumes:
+      - /path/to/config:/config
+      - /path/to/cache:/cache
+      - /path/to/media:/media
+    restart: unless-stopped
+</code></pre>
+<p>This TOML file can't support environment variables, so don't attempt to use variables.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Due to a <a href="https://github.com/containous/traefik/issues/5559">bug</a> in Traefik, you cannot dynamically route to containers when network_mode=host, so we have created a static route to the docker host (172.17.0.1:8096) in <code>traefik.toml</code>. Using host networking (or macvlan) is required to use DLNA or an HdHomeRun as it supports multicast networking.</p>
+</div>
+<h3 id="traefiktoml">traefik.toml</h3>
+<pre><code class="lang-toml">logLevel = &quot;WARN&quot;
+defaultEntryPoints = [&quot;http&quot;, &quot;https&quot;]
+
+[entryPoints]
+  [entryPoints.http]
+  address = &quot;:80&quot;
+    [entryPoints.http.redirect]
+    entryPoint = &quot;https&quot;
+  [entryPoints.https]
+  address = &quot;:443&quot;
+    [entryPoints.https.tls]
+    minVersion = &quot;VersionTLS12&quot;
+    cipherSuites = [
+      &quot;TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384&quot;,
+      &quot;TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384&quot;,
+      &quot;TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305&quot;,
+      &quot;TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305&quot;,
+      &quot;TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256&quot;,
+      &quot;TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256&quot;,
+      &quot;TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256&quot;,
+      &quot;TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256&quot;
+    ]
+
+[retry]
+
+[api]
+
+[acme]
+acmeLogging = true
+email = &quot;user@example.com&quot;
+storage = &quot;acme.json&quot;
+entryPoint = &quot;https&quot;
+  [acme.dnsChallenge]
+    provider = &quot;provider&quot;
+    delayBeforeCheck = &quot;60&quot;
+
+[[acme.domains]]
+  main = &quot;*.example.com&quot;
+
+[docker]
+domain = &quot;example.com&quot;
+network = &quot;traefik&quot;
+exposedbydefault = false
+
+[file]
+[backends]
+  [backends.backend-jellyfin]
+    [backends.backend-jellyfin.servers]
+      [backends.backend-jellyfin.servers.server-1]
+        url = &quot;http://172.17.0.1:8096&quot;
+[frontends]
+  [frontends.jellyfin]
+    backend = &quot;backend-jellyfin&quot;
+    passHostHeader = true
+    [frontends.jellyfin.routes]
+      [frontends.jellyfin.routes.route-jellyfin-ext]
+        rule = &quot;Host:jellyfin.example.com&quot;
+    [frontends.jellyfin.headers]
+      SSLRedirect = true
+      SSLHost = &quot;jellyfin.example.com&quot;
+      SSLForceHost = true
+      STSSeconds = 315360000
+      STSIncludeSubdomains = true
+      STSPreload = true
+      forceSTSHeader = true
+      frameDeny = true
+      contentTypeNosniff = true
+      browserXSSFilter = true
+      customResponseHeaders = &quot;X-Robots-Tag:noindex,nofollow,nosnippet,noarchive,notranslate,noimageindex&quot;
+      customFrameOptionsValue = &quot;allow-from https://example.com&quot;
+</code></pre>
+<p>Finally, create an empty acme.json file to handle the certificate.</p>
+<pre><code class="lang-bash">touch acme.json
+chmod 600 acme.json
+</code></pre>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Change example.com to your domain name and update the acme.json file with your email address. Let's Encrypt does not require a valid email but example.com will be flagged as fake.</p>
+</div>
+<p>Launch the Traefik and Jellyfin services.</p>
+<pre><code class="lang-bash">docker-compose up -d
+</code></pre>
+<p>Congratulations, your stack with Traefik and Jellyfin is running!</p>
+<p>Go to the domain you used earlier in the config file and your Jellyfin server will be running with HTTPS (AES 256) enabled.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Mopidy | myhelp </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Mopidy | myhelp ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+  </head>
+
+  <script type="module" src="./../../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="myhelp">
+            myhelp
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="clients-mopidy">
+<h1 id="installing-mopidy-extension">Installing Mopidy Extension</h1>
+
+<p>The Mopidy Jellyfin extension is available to install from <a href="https://pypi.org/project/Mopidy-Jellyfin">PyPi</a> using pip.</p>
+<h2 id="general">General</h2>
+<p>For general use computers, such as workstations or laptops, it's recommended to install Mopidy extensions in user mode.  Installing python packages from pip using sudo or root permissions can lead to conflicts with your package manager in the future.</p>
+<ol>
+<li><p>Install Mopidy using your method of choice using the <a href="https://docs.mopidy.com/en/latest/installation/">official documentation</a></p>
+</li>
+<li><p>Install the Jellyfin extension for Mopidy:</p>
+<pre><code class="lang-sh">pip3 install --user mopidy-jellyfin
+</code></pre>
+</li>
+<li><p>(Optional) Install other mopidy related packages:</p>
+<pre><code class="lang-sh">pip3 install --user mopidy-mpd mopidy-musicbox-webclient
+</code></pre>
+</li>
+<li><p>Configure your <code>mopidy.conf</code> located at <code>$HOME/.config/mopidy/mopidy.conf</code>
+See <a class="xref" href="mopidy.html#config-file">Config File</a></p>
+</li>
+<li><p>There may be a need to install extra <code>gstreamer</code> codecs if they're not already on your system, but these are highly variable and depend on your hardware and distro</p>
+</li>
+<li><p>Start the program by running <code>mopidy</code> from a terminal</p>
+</li>
+<li><p>See <a class="xref" href="mopidy.html#usage">Usage</a></p>
+</li>
+</ol>
+<h2 id="raspberry-pi-remote-controlled-speakers">Raspberry Pi (Remote Controlled Speakers)</h2>
+<p>Utilizing a Raspberry Pi (or other small form factor computer) it's possible to use Mopidy to build a set of standalone smart speakers connected to your Jellyfin server.</p>
+<ol>
+<li><p>Grab the latest <a href="https://www.raspberrypi.org/downloads/raspbian/">raspbian image</a>.  Unless you have a need for a GUI, the 'Lite' image is plenty for this project.</p>
+</li>
+<li><p>Install the image to the SD card (See the <a href="https://www.raspberrypi.org/documentation/installation/installing-images/README.md">official documentation</a>)</p>
+</li>
+<li><p>Install Mopidy from their <a href="https://docs.mopidy.com/en/latest/installation/debian/#install-from-apt-mopidy-com">apt repo</a> to ensure we get the latest version</p>
+</li>
+<li><p>Install required OS packages:</p>
+<pre><code class="lang-sh">sudo apt install mopidy mopidy-mpd gstreamer1.0-plugins-bad python3-pip
+</code></pre>
+</li>
+<li><p>Install the Jellyfin extension and any other Mopidy related packages you may want:</p>
+<pre><code class="lang-sh">sudo pip3 install mopidy-jellyfin mopidy-musicbox-webclient
+</code></pre>
+</li>
+<li><p>Configure your <code>mopidy.conf</code> located at <code>/etc/mopidy/mopidy.conf</code>:
+See <a class="xref" href="mopidy.html#config-file">Config File</a></p>
+</li>
+<li><p>Enable and start the mopidy service:</p>
+<pre><code class="lang-sh">sudo systemctl enable --now mopidy
+</code></pre>
+</li>
+<li><p>See <a class="xref" href="mopidy.html#usage">Usage</a></p>
+</li>
+</ol>
+<h2 id="config-file">Config File</h2>
+<p>The config file for Mopidy is divided into sections in an INI format. An example for Jellyfin is shown here.</p>
+<pre><code class="lang-ini">[jellyfin]
+hostname = Jellyfin server hostname
+username = username
+password = password
+libraries = Library1, Library2 (Optional: will default to &quot;Music&quot; if left undefined)
+albumartistsort = False (Optional: will default to True if left undefined)
+album_format = {ProductionYear} - {Name} (Optional: will default to &quot;{Name}&quot; if left undefined)
+</code></pre>
+<ul>
+<li><code>libraries</code> determines what is populated into Mopidy's internal library (view by Artists/Album/etc).  Using the file browser will show all music or book libraries in the Jellyfin server</li>
+<li><code>albumartistsort</code> changes whether the media library populates based on &quot;Artist&quot; or &quot;Album Artist&quot; metadata</li>
+<li><code>album_format</code> can be used to change the display format of music albums when using the file browser view.  Currently the only really usable fields are ProductionYear and Name</li>
+</ul>
+<p>Other options that may be useful to include:</p>
+<pre><code class="lang-ini">[mpd]
+enabled = true
+# Useful if you want to control this instance from a remote MPD client
+hostname = 0.0.0.0
+port = 6600
+# This will help avoid timeout errors for  artists or folders with large amounts of files
+connection_timeout = 300
+
+# Used in the event you want to control this system from a web browser
+[http]
+hostname = 0.0.0.0
+port = 6680
+</code></pre>
+<p>Be aware that Mopidy provides no security on open ports, so if you'll be running this in a public place you'll likely want to change <code>0.0.0.0</code> to <code>127.0.0.1</code> to prevent somebody else from hijacking your listening session.</p>
+<h2 id="usage">Usage</h2>
+<p>Once Mopidy is running, you can connect and control it with your client of choice.  MPD clients will connect using port 6600 by default.  Tested MPD clients include <a href="https://github.com/arybczak/ncmpcpp">ncmpcpp</a> and <a href="https://play.google.com/store/apps/details?id=org.gateshipone.malp">M.A.L.P</a>.  Web clients can be reached at <code>http://localhost:6680</code>, or <code>http://$IP_ADDRESS:6680</code> if this is a remote system.</p>
+<h2 id="upgrading">Upgrading</h2>
+<p>When a new version of Mopidy Jellyfin is released, you can upgrade via pip using the <code>--upgrade</code> flag.</p>
+<pre><code class="lang-sh">pip3 install --user --upgrade mopidy-jellyfin
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

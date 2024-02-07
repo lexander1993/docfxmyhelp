@@ -1,0 +1,701 @@
+{
+  "source_base_path": "C:/Alex Project/myhelp",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/about.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/about.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/administration/building.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/administration/building.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/administration/configuration.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/administration/configuration.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/administration/hardware-acceleration.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/administration/hardware-acceleration.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/administration/install/synology.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/administration/install/synology.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/administration/installing.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/administration/installing.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/administration/migrate.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/administration/migrate.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/administration/troubleshooting.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/administration/troubleshooting.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/clients/codec-support.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/clients/codec-support.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/clients/css-customization.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/clients/css-customization.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/clients/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/clients/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/clients/kodi.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/clients/kodi.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/clients/mopidy.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/clients/mopidy.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/clients/web-config.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/clients/web-config.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/community-standards.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/community-standards.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/contributing/branding.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/contributing/branding.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/contributing/development.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/contributing/development.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/contributing/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/contributing/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/contributing/issues.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/contributing/issues.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/contributing/release-procedure.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/contributing/release-procedure.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/contributing/source-tree.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/contributing/source-tree.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "general/contributing/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "general/contributing/toc.html"
+        },
+        ".json": {
+          "relative_path": "general/contributing/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/faq.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/faq.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/getting-help.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/getting-help.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/apache.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/apache.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/caddy.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/caddy.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/dlna.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/dlna.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/fail2ban.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/fail2ban.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/haproxy.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/haproxy.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/letsencrypt.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/letsencrypt.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/monitoring.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/monitoring.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/nginx.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/nginx.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/traefik.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/traefik.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/networking/traefik2.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/networking/traefik2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/quick-start.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/quick-start.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/devices.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/devices.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/libraries.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/libraries.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/live-tv/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/live-tv/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/live-tv/post-process.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/live-tv/post-process.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/live-tv/setup-guide.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/live-tv/setup-guide.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/media/books.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/media/books.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/media/comics.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/media/comics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/media/external-files.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/media/external-files.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/media/internet-radio.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/media/internet-radio.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/media/movies.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/media/movies.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/media/music.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/media/music.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/media/shows.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/media/shows.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/notifications.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/notifications.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/plugins/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/plugins/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/plugins/open-subtitles.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/plugins/open-subtitles.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/plugins/tvheadend.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/plugins/tvheadend.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/quick-connect.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/quick-connect.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/settings.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/settings.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/storage.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/storage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/tasks.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/tasks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/transcoding.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/transcoding.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/users/adding-managing-users.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/users/adding-managing-users.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/server/users/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/server/users/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/style-guides/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/style-guides/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "general/style-guides/javascript.md",
+      "output": {
+        ".html": {
+          "relative_path": "general/style-guides/javascript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "general/style-guides/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "general/style-guides/toc.html"
+        },
+        ".json": {
+          "relative_path": "general/style-guides/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "general/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "general/toc.html"
+        },
+        ".json": {
+          "relative_path": "general/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

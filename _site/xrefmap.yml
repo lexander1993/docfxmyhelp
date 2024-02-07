@@ -1,0 +1,183 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: about
+  name: About
+  href: general/about.html
+- uid: admin-building
+  name: Building from Source
+  href: general/administration/building.html
+- uid: admin-configuration
+  name: Configuration
+  href: general/administration/configuration.html
+- uid: admin-hardware-acceleration
+  name: Hardware Acceleration
+  href: general/administration/hardware-acceleration.html
+- uid: admin-install-synology
+  name: Installing on Synology
+  href: general/administration/install/synology.html
+- uid: admin-installing
+  name: Installation
+  href: general/administration/installing.html
+- uid: admin-migrate
+  name: Migrating
+  href: general/administration/migrate.html
+- uid: admin-troubleshoot
+  name: Troubleshooting
+  href: general/administration/troubleshooting.html
+- uid: clients-codec-support
+  name: Codec Support
+  href: general/clients/codec-support.html
+- uid: clients-css-customization
+  name: CSS Customization
+  href: general/clients/css-customization.html
+- uid: clients-index
+  name: Clients
+  href: general/clients/index.html
+- uid: clients-kodi
+  name: Kodi
+  href: general/clients/kodi.html
+- uid: clients-mopidy
+  name: Mopidy
+  href: general/clients/mopidy.html
+- uid: clients-web-config
+  name: Web Configuration
+  href: general/clients/web-config.html
+- uid: community-standards
+  name: Jellyfin Community Standards
+  href: general/community-standards.html
+- uid: contrib-branding
+  name: Branding
+  href: general/contributing/branding.html
+- uid: contrib-development
+  name: Development
+  href: general/contributing/development.html
+- uid: contrib-index
+  name: Contributing
+  href: general/contributing/index.html
+- uid: contrib-issues
+  name: Reporting Issues
+  href: general/contributing/issues.html
+- uid: contrib-release-procedure
+  name: Releases
+  href: general/contributing/release-procedure.html
+- uid: contrib-source-tree
+  name: Source Tree
+  href: general/contributing/source-tree.html
+- uid: faq
+  name: FAQ
+  href: general/faq.html
+- uid: getting-help
+  name: Getting Help
+  href: general/getting-help.html
+- uid: monitoring
+  name: Monitoring
+  href: general/networking/monitoring.html
+- uid: network-dlna
+  name: DLNA
+  href: general/networking/dlna.html
+- uid: network-fail2ban
+  name: fail2ban
+  href: general/networking/fail2ban.html
+- uid: network-index
+  name: Networking
+  href: general/networking/index.html
+- uid: network-letsencrypt
+  name: Let's Encrypt
+  href: general/networking/letsencrypt.html
+- uid: network-reverse-proxy-apache
+  name: Apache
+  href: general/networking/apache.html
+- uid: network-reverse-proxy-caddy
+  name: Caddy
+  href: general/networking/caddy.html
+- uid: network-reverse-proxy-haproxy
+  name: HAProxy
+  href: general/networking/haproxy.html
+- uid: network-reverse-proxy-nginx
+  name: Nginx
+  href: general/networking/nginx.html
+- uid: network-reverse-proxy-traefik
+  name: Traefik v1.x
+  href: general/networking/traefik.html
+- uid: network-reverse-proxy-traefik2
+  name: Traefik v2.x
+  href: general/networking/traefik2.html
+- uid: quick-start
+  name: Quick Start
+  href: general/quick-start.html
+- uid: server-devices
+  name: Devices
+  href: general/server/devices.html
+- uid: server-libraries
+  name: Libraries
+  href: general/server/libraries.html
+- uid: server-live-tv-index
+  name: Live TV
+  href: general/server/live-tv/index.html
+- uid: server-live-tv-post-process
+  name: Live TV Post Processing
+  href: general/server/live-tv/post-process.html
+- uid: server-live-tv-setup-guide
+  name: Setup Guide
+  href: general/server/live-tv/setup-guide.html
+- uid: server-media-books
+  name: Books
+  href: general/server/media/books.html
+- uid: server-media-comics
+  name: Comics
+  href: general/server/media/comics.html
+- uid: server-media-external-files
+  name: External files
+  href: general/server/media/external-files.html
+- uid: server-media-internet-radio
+  name: Internet radio
+  href: general/server/media/internet-radio.html
+- uid: server-media-movies
+  name: Movies
+  href: general/server/media/movies.html
+- uid: server-media-music
+  name: Music
+  href: general/server/media/music.html
+- uid: server-media-shows
+  name: Shows
+  href: general/server/media/shows.html
+- uid: server-notifications
+  name: Notifications
+  href: general/server/notifications.html
+- uid: server-plugins-index
+  name: Plugins
+  href: general/server/plugins/index.html
+- uid: server-plugins-open-subtitles
+  name: Open Subtitles
+  href: general/server/plugins/open-subtitles.html
+- uid: server-plugins-tvheadend
+  name: TVHeadend
+  href: general/server/plugins/tvheadend.html
+- uid: server-quick-connect
+  name: Quick Connect
+  href: general/server/quick-connect.html
+- uid: server-settings
+  name: Settings
+  href: general/server/settings.html
+- uid: server-storage
+  name: Storage
+  href: general/server/storage.html
+- uid: server-tasks
+  name: Tasks
+  href: general/server/tasks.html
+- uid: server-transcoding
+  name: Transcoding
+  href: general/server/transcoding.html
+- uid: server-users-index
+  name: Users
+  href: general/server/users/index.html
+- uid: server-users-managing
+  name: Managing Users
+  href: general/server/users/adding-managing-users.html
+- uid: style-guides
+  name: Style Guides
+  href: general/style-guides/index.html
+- uid: style-guides-javascript
+  name: JavaScript
+  href: general/style-guides/javascript.html

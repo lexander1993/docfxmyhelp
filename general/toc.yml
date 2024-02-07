@@ -1,0 +1,27 @@
+- name: Get Started
+  items:
+  - uid: admin-installing
+  - uid: admin-building
+  - uid: admin-configuration
+  - uid: admin-migrate
+  - uid: admin-hardware-acceleration
+  - uid: admin-troubleshoot
+
+- uid: clients-index
+  items:
+  - uid: clients-css-customization
+  - uid: clients-codec-support
+  - uid: clients-kodi
+  - uid: clients-mopidy
+  - uid: clients-web-config
+
+- name: Administration
+  items:
+  - uid: admin-building
+  - uid: admin-configuration
+  - uid: admin-migrate
+  - uid: admin-hardware-acceleration
+  - uid: admin-troubleshoot
+
+
+
